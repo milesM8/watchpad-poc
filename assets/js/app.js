@@ -11,6 +11,9 @@ $(document).ready(function () {
             case "discover":
                 queryURL += "/discover/movie"
                 break;
+            case "movie":
+                queryURL += `/movie/${parameters.movie_id}`
+                break;
         }
 
         $.ajax({
@@ -27,5 +30,5 @@ $(document).ready(function () {
         });
     }
 
-
+    
 })
