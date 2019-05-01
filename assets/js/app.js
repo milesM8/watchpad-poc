@@ -19,7 +19,7 @@ $(document).ready(function () {
         $.ajax({
             url: queryURL,
             type: 'GET',
-            data: requestData,
+            data: { ...requestData, ...parameters},
             dataType: 'json',
             success: function (data) {
                 callBack({ ...data, success: true });
@@ -29,6 +29,4 @@ $(document).ready(function () {
             }
         });
     }
-
-    
 })
