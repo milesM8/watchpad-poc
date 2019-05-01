@@ -1,0 +1,13 @@
+h3 {
+	color: black;
+	text-align: center;
+	float: right;
+}
+
+.card {
+	padding: 0px;
+}
+
+.sidebar {
+	float: left;
+}
