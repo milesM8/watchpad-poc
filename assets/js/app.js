@@ -17,6 +17,15 @@ $(document).ready(function () {
             case "tv":
                 queryURL += `/tv/${parameters.tv_id}`
                 break;
+            case "tvSeason":
+                queryURL += `/tv/${parameters.tv_id}/season/${parameters.season_number}`
+                break;
+            case "tvEpisode":
+                queryURL += `/tv/${parameters.tv_id}/season/${parameters.season_number}/episode/${parameters.episode_number}`
+                break;
+            case "company":
+                queryURL += `/search/company`
+                break;
             case "search":
                 queryURL += `/search/multi`
                 break;
