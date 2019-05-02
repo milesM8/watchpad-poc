@@ -10,21 +10,31 @@ body {
 	color: #ccc;
 }
 
-.row {
-	height: 100vh;
-}
-
 a {
 	text-decoration: none;
 	color: #ccc;
 }
 
-#search-bar {
+#nav {
+	background-color: #1E212F;
+	height: 100px;
+	line-height: 100px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#title-logo {
 	text-align: center;
 }
 
+#search-bar {}
+
 #dashboard-link {
 	text-align: right;
+	padding: 0 20px;
+}
+
+.row {
+	height: 100vh;
 }
 
 #filters {
@@ -33,8 +43,52 @@ a {
 	height: 100%!important;
 }
 
-#nav {
-	background-color: #1E212F;
-	height: 100px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+.poster {
+	position: relative;
+	display: inline-block;
+	margin: 10px;
+	overflow: auto;
+}
+
+.poster img {
+	width: 200px;
+	transition: all 0.5s;
+}
+
+.poster>.imgBackdrop {
+	z-index: -1;
+	background: #000;
+	overflow: auto;
+}
+
+.posterBody {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.poster .posterTitle {
+	color: #fff;
+	transition: all 2s;
+}
+
+.poster:hover .posterTitle {
+	opacity: 1;
+}
+
+.poster:hover img {
+	opacity: 0.4;
+}
+
+.posterBody>.posterButtons {
+	display: flex;
+	align-content: stretch;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.posterBody>.posterButtons>button {
+	flex-grow: 1;
 }
