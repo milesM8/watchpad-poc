@@ -30,15 +30,16 @@ a {
 
 #search-bar {
 	padding: 0 40px;
-	border: none;
 }
 
 #search {
 	width: 420px;
-	padding-top: 20px;
+	padding: 30px 0 7px 0;
 	font-size: 16px;
-	border-bottom: 1px solid #999;
+	border: none;
+	border-bottom: 1px solid #666;
 	background: none;
+	outline: none;
 }
 
 #dashboard-link {
@@ -114,10 +115,4 @@ a {
 
 .carousel div {
 	white-space: normal;
-}
-
-#nav {
-	background-color: #1E212F;
-	height: 100px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
