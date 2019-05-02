@@ -11,6 +11,9 @@
 			integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX"
 			crossorigin="anonymous"
 		/>
+		<!-- <link rel="stylesheet" href="owlcarousel/owl.carousel.min.css" />
+		<link rel="stylesheet" href="owlcarousel/owl.theme.default.min.css" /> -->
+
 		<link rel="stylesheet" href="assets/css/style.css" />
 	</head>
 
@@ -108,61 +111,21 @@
 
 			<div class="row">
 				<h1>Movie Placeholder</h1>
-				<div class="table-responsive">
-					<table class="table">
-						<tbody>
-							<tr>
-								<th scope="row"></th>
-								<td>imgplaceholder</td>
-								<td>imgplaceholder</td>
-								<td>imgplaceholder</td>
-								<td>imgplaceholder</td>
-								<td>imgplaceholder</td>
-								<td>imgplaceholder</td>
-							</tr>
-							<tr>
-								<th scope="row"></th>
-								<td>imgplaceholder</td>
-								<td>imgplaceholder</td>
-								<td>imgplaceholder</td>
-								<td>imgplaceholder</td>
-								<td>imgplaceholder</td>
-								<td>imgplaceholder</td>
-							</tr>
-						</tbody>
-					</table>
+				<div id="watchlist" class="owl-carousel">
+					<div>Your Content</div>
 				</div>
 			</div>
 			<div class="row">
 				<h1>TV Placeholder</h1>
-				<div class="table-responsive">
-					<table class="table">
-						<tbody>
-							<tr>
-								<th scope="row"></th>
-								<td>imgplaceholder</td>
-								<td>imgplaceholder</td>
-								<td>imgplaceholder</td>
-								<td>imgplaceholder</td>
-								<td>imgplaceholder</td>
-								<td>imgplaceholder</td>
-							</tr>
-							<tr>
-								<th scope="row"></th>
-								<td>imgplaceholder</td>
-								<td>imgplaceholder</td>
-								<td>imgplaceholder</td>
-								<td>imgplaceholder</td>
-								<td>imgplaceholder</td>
-								<td>imgplaceholder</td>
-							</tr>
-						</tbody>
-					</table>
+				<div id="havewatched" class="owl-carousel">
+					<div>Your Content</div>
 				</div>
 			</div>
 		</div>
+		<!-- <script src="owlcarousel/owl.carousel.min.js"></script> -->
 
 		<script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+
 		<script
 			src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js"
 			integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U"
@@ -173,11 +136,14 @@
 			integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9"
 			crossorigin="anonymous"
 		></script>
+
 		<script>
 			$(document).ready(function() {
 				$("body").bootstrapMaterialDesign();
+				// $(".owl-carousel").owlCarousel();
 			});
 		</script>
+
 		<script src="assets/js/app.js"></script>
 	</body>
 </html>
