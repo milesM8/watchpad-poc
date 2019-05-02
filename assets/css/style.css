@@ -15,22 +15,18 @@ h3 {
 
 .poster{
 	position: relative;
-	width: 220px;
-	height: 330px;
 	display: inline-block;
 	margin: 10px;
+	overflow: auto;
 }
 .poster img {
-	position: absolute;
-	width: 100%;
+	width: 200px;
 	transition: all 0.5s;
 }
 .poster > .imgBackdrop {
-	position: absolute;
-	width: 100%;
 	z-index: -1;
-	height: 100%;
-	background: #000
+	background: #000;
+	overflow: auto;
 }
 .posterBody{
 	position: absolute;
