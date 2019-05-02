@@ -1,7 +1,5 @@
-html, body {
-	height: 100vh;
-	margin: 0;
-	padding: 0;
+html, body, main, .row, .col {
+	height: 100%;
 }
 
 body {
@@ -20,6 +18,8 @@ a {
 	height: 80px;
 	line-height: 80px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	position: fixed;
+	z-index: 999;
 }
 
 #title-logo {
@@ -29,18 +29,26 @@ a {
 }
 
 #search-bar {
-	padding: 0 20px;
+	padding: 0 40px;
+	border: none;
 }
 
-.searchForm {}
+#search {
+	width: 420px;
+	padding-top: 20px;
+	font-size: 16px;
+	border-bottom: 1px solid #999;
+	background: none;
+}
 
 #dashboard-link {
 	text-align: right;
-	padding: 0 20px;
+	padding: 0 55px;
 }
 
-.row {
-	height: 100vh;
+#content {
+	margin-top: 100px;
+	padding: 0 30px;
 }
 #main-section{
 	
@@ -50,6 +58,7 @@ a {
 	background-color: #222536;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	height: 100%!important;
+	margin-top: 80px;
 }
 #content{
 
