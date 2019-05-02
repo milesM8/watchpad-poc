@@ -54,3 +54,12 @@ h3 {
 .posterBody > .posterButtons > button {
 	flex-grow: 1;
 }
+
+.carousel{
+	white-space: nowrap;
+	overflow-x: auto;
+	width: 100%;
+}
+.carousel div{
+	white-space: normal;
+}
