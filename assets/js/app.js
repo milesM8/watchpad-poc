@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     // TMDB API Query call
-    const tmdbQuery = (type, callBack, parameters = {}) => {
+    const tmdbQuery = (type, parameters = {}) => {
         let queryURL = "https://api.themoviedb.org/3"
         const requestData = { api_key: strings.TMDB_KEY }
 
@@ -29,18 +29,15 @@ $(document).ready(function () {
                 break;
         }
 
-        $.ajax({
+        return query = $.ajax({
             url: queryURL,
             type: 'GET',
             data: { ...requestData, ...parameters },
-            dataType: 'json',
-            success: function (data) {
-                callBack({ ...data, success: true });
-            },
-            error: function (request, error) {
-                callBack({ ...request, success: false });
-            }
+            dataType: 'json'
         });
     }
-
+    
+    tmdbQuery("discover").then(function(response){
+        console.log(response);
+    })
 })
