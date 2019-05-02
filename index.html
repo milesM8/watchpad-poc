@@ -26,15 +26,12 @@
 					</form>
 				</div>
 
-				<div class="col" id="dashboard-link">
-					<a href="#">Dashboard</a>
-				</div>
-			</div>
+
 		</header>
 
 		<main class="container-fluid" id="main-section">
 			<div class="row">
-				<div class="col-3" id="filters">
+				<div class="col-2" id="filters">
 					<a class="nav-link" href="#">Example Link</a><br />
 					<form>
 					<div class="movie-or-tv-box">
@@ -42,35 +39,48 @@
 						<input type="checkbox" name="movie-tv-checkbox" id="filterTV" value="filter-tv" />filter by television<br />
 					</div>
 					<div class='genre'>
-<select multiple>
-  <option value="volvo">Volvo</option>
-  <option value="saab">Saab</option>
-  <option value="opel">Opel</option>
-  <option value="audi">Audi</option>
-</select>
+					<select multiple>
+  					<option value="28,12,10759">Action & Adventure</option>
+  					<option value="16">Animation</option>
+					<option value="35">Comedy</option>
+  					<option value="80">Crime</option>
+  					<option value="99">Documentary</option>
+					<option value="18">Drama</option>
+					<option value="">Family</option>
+  					<option value=>Kvalues</option>
+  					<option value=>Mystery</option>
+  					<option value=>Sci-Fi & Fantasy</option>
+  					<option value=>Talk</option>
+  					<option value=>News</option>
+					<option value=>Reality</option>
+  					<option value=>Soap</option>
+					<option value=>War & Politics</option>
+					<option value=>Western</option>
+					</select>
 					</div>
+					<label>year</label>
 					<div class='filter-year'>
-						<input type="number" id="yearInput">year
+						<input type="number" id="yearInput">
 					</div>
-					<!-- <div class = "filter-movie-specific">
-						
-					</div> -->
-					<div class = "filter-tv-specific">
-						<input class = "filter-tv-season" id="tvSeason"> by season</input>
-						<input class = "filter-tv-episode" id = "tvEpisode"> by episode</input>
+					<div class = "sort">
+						<input type = "checkbox" id = "sort-name"><label>by name</label><input type="checkbox" id = "descending">
+
 					</div>
+
 					</form>
 				</div>
 
-				<div class="col-9" id="content">
-					Test
+			<div class="col-10" id="content">
+				<div id="discoverCarousel" class="carousel">
 				</div>
 			</div>
-		</main>
+		</div>
+	</main>
 
-		<script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
 
-		<script src="assets/js/resources.js"></script>
-		<script src="assets/js/app.js"></script>
-	</body>
+	<script src="assets/js/resources.js"></script>
+	<script src="assets/js/app.js"></script>
+</body>
+
 </html>

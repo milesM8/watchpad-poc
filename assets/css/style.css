@@ -1,34 +1,121 @@
+html, body, main, .row, .col {
+	height: 100%;
+}
+
 body {
 	background-color: #1B1E2C;
 	font-family: 'Open Sans', sans-serif;
 	color: #ccc;
-	height: 100%;
 }
 
-.container-fluid {
-	width: 100%;
-}
-
-#main-section {
-	height: 100%;
-}
-
-#search-bar {
-	text-align: center;
-}
-
-#dashboard-link {
-	text-align: right;
-}
-
-#filters {
-	background-color: #222536;
-}
-
-#content {
-	background-color: #1B1E2C;
+a {
+	text-decoration: none;
+	color: #ccc;
 }
 
 #nav {
 	background-color: #1E212F;
+	height: 80px;
+	line-height: 80px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	position: fixed;
+	z-index: 999;
+}
+
+#title-logo {
+	text-align: center;
+	font-weight: 600;
+	font-size: 28px;
+}
+
+#search-bar {
+	padding: 0 40px;
+	border: none;
+}
+
+#search {
+	width: 420px;
+	padding-top: 20px;
+	font-size: 16px;
+	border-bottom: 1px solid #999;
+	background: none;
+}
+
+#dashboard-link {
+	text-align: right;
+	padding: 0 55px;
+}
+
+#content {
+	margin-top: 100px;
+	padding: 0 30px;
+}
+
+#filters {
+	background-color: #222536;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	height: 100%!important;
+	margin-top: 80px;
+}
+
+.poster {
+	position: relative;
+	display: inline-block;
+	margin: 10px;
+}
+
+.poster img {
+	width: 200px;
+	transition: all 0.5s;
+}
+
+.poster>.imgBackdrop {
+	z-index: -1;
+	background: #000;
+}
+
+.posterBody {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.poster .posterTitle {
+	color: #fff;
+	transition: all 2s;
+}
+
+.poster:hover .posterTitle {
+	opacity: 1;
+}
+
+.poster:hover img {
+	opacity: 0.4;
+}
+
+.posterBody>.posterButtons {
+	display: flex;
+	align-content: stretch;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.posterBody>.posterButtons>button {
+	flex-grow: 1;
+}
+
+.carousel{
+	white-space: nowrap;
+	overflow-x: auto;
+	width: 100%;
+}
+.carousel div{
+	white-space: normal;
+}
+#nav {
+	background-color: #1E212F;
+	height: 100px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
