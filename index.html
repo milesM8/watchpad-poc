@@ -1,35 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Document</title>
 
-	<title>Document</title>
+		<link rel="stylesheet" href="assets/css/reset.css" />
+		<link rel="stylesheet" href="assets/css/bootstrap-grid.min.css" />
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
+		<link rel="stylesheet" href="assets/css/style.css" />
+	</head>
 
-	<link rel="stylesheet" href="assets/css/reset.css">
-	<link rel="stylesheet" href="assets/css/bootstrap-grid.min.css" />
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-	<link rel="stylesheet" href="assets/css/style.css" />
-</head>
+	<body>
+		<header class="container-fluid" id="nav">
+			<div class="row">
+				<div class="col-2" id="title-logo">
+					<a href="index.html">WatchPad</a>
+				</div>
 
-<body>
-	<header class="container-fluid" id="nav">
-		<div class="row">
+				<div class="col" id="search-bar">
+					<form action="#" class="searchForm">
+						<input type="text" name="query" id="search" placeholder="Search" />
+					</form>
+				</div>
 
-			<div class="col-2" id="title-logo">
-				<a href="index.html">watchPad</a>
+				<div class="col-2" id="dashboard-link">
+					<a href="#">Dashboard</a>
+				</div>
 			</div>
+		</header>
 
-			<div class="col" id="search-bar">
-				<form action="#" class="searchForm">
-					<input type="text" name="query" id="search" placeholder="Search for movie or tv show">
+		<main class="container-fluid open" id="main-section" data-state="open">
+			<div id="filters">
+				<div class="sideBarTitle">
+					<span class="heading">Filters</span>
+					<div class="menuIcon" id="toggleSidebar"><span><</span></div>
+				</div>
+				<form>
+					<a class="nav-link" href="#">Filters</a>
 				</form>
 			</div>
 
-			<div class="col-2" id="dashboard-link">
-				<a href="#">Dashboard</a>
+			<div id="content">
+				<div id="discoverCarousel" class="carousel"></div>
 			</div>
 		</div>
 	</header>
@@ -50,8 +65,9 @@
 
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
 
-	<script src="assets/js/resources.js"></script>
-	<script src="assets/js/app.js"></script>
-</body>
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
 
+		<script src="assets/js/resources.js"></script>
+		<script src="assets/js/app.js"></script>
+	</body>
 </html>
