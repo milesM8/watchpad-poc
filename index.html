@@ -1,55 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Document</title>
 
-	<title>Document</title>
+		<link rel="stylesheet" href="assets/css/reset.css" />
+		<link rel="stylesheet" href="assets/css/bootstrap-grid.min.css" />
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
+		<link rel="stylesheet" href="assets/css/style.css" />
+	</head>
 
-	<link rel="stylesheet" href="assets/css/reset.css">
-	<link rel="stylesheet" href="assets/css/bootstrap-grid.min.css" />
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-	<link rel="stylesheet" href="assets/css/style.css" />
-</head>
+	<body>
+		<header class="container-fluid" id="nav">
+			<div class="row">
+				<div class="col" id="title-logo">
+					<a href="index.html">watchPad</a>
+				</div>
 
-<body>
-	<header class="container-fluid" id="nav">
-		<div class="row">
+				<div class="col" id="search-bar">
+					<form action="#" class="searchForm">
+						<input type="text" name="query" placeholder="Search" />
+					</form>
+				</div>
 
-			<div class="col" id="title-logo">
-				<a href="index.html">watchPad</a>
+				<div class="col" id="dashboard-link">
+					<a href="#">Dashboard</a>
+				</div>
 			</div>
+		</header>
 
-			<div class="col" id="search-bar">
-				<form action="#" class="searchForm">
-					<input type="text" name="query" placeholder="Search">
-				</form>
+		<main class="container-fluid" id="main-section">
+			<div class="row">
+				<div class="col-3" id="filters">
+					<a class="nav-link" href="#">Example Link</a><br />
+					<form>
+					<div class="movie-or-tv-box">
+						<input type="checkbox" name="movie-tv-checkbox" id="filterMovie" value="filter-movie" />filter by movie<br />
+						<input type="checkbox" name="movie-tv-checkbox" id="filterTV" value="filter-tv" />filter by television<br />
+					</div>
+					<div class='genre'>
+<select multiple>
+  <option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="opel">Opel</option>
+  <option value="audi">Audi</option>
+</select>
+					</div>
+					<div class='filter-year'>
+						<input type="number" id="yearInput">year
+					</div>
+					<!-- <div class = "filter-movie-specific">
+						
+					</div> -->
+					<div class = "filter-tv-specific">
+						<input class = "filter-tv-season" id="tvSeason"> by season</input>
+						<input class = "filter-tv-episode" id = "tvEpisode"> by episode</input>
+					</div>
+					</form>
+				</div>
+
+				<div class="col-9" id="content">
+					Test
+				</div>
 			</div>
+		</main>
 
-			<div class="col" id="dashboard-link">
-				<a href="#">Dashboard</a>
-			</div>
-		</div>
-	</header>
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
 
-	<main class="container-fluid" id="main-section">
-		<div class="row">
-			<div class="col-3" id="filters">
-				<a class="nav-link" href="#">Example Link</a>
-			</div>
-
-			<div class="col-9" id="content">
-				Test
-			</div>
-		</div>
-	</main>
-
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
-
-	<script src="assets/js/resources.js"></script>
-	<script src="assets/js/app.js"></script>
-</body>
-
+		<script src="assets/js/resources.js"></script>
+		<script src="assets/js/app.js"></script>
+	</body>
 </html>

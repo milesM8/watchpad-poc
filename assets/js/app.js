@@ -50,11 +50,14 @@ $(document).ready(function () {
         const watchListButton = $("<button>").text(strings.WATCHLIST)
         const ignoreButton = $("<button>").text(strings.IGNORE)
 
+        
+
         posterButtons.append(collectionButton, watchListButton, ignoreButton)
         posterContainer.append(posterImage, posterTitle, posterButtons)
 
         return posterContainer
     }
+
 
     const search = (query, page = 1) => {
         tmdbQuery("search", { query: query, page: page }).then(function (response) {
