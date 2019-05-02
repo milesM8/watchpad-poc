@@ -17,16 +17,22 @@ a {
 
 #nav {
 	background-color: #1E212F;
-	height: 100px;
-	line-height: 100px;
+	height: 80px;
+	line-height: 80px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #title-logo {
 	text-align: center;
+	font-weight: 600;
+	font-size: 28px;
 }
 
-#search-bar {}
+#search-bar {
+	padding: 0 20px;
+}
+
+.searchForm {}
 
 #dashboard-link {
 	text-align: right;
