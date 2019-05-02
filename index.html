@@ -1,73 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-		<title>Document</title>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-		<link rel="stylesheet" href="assets/css/reset.css" />
-		<link rel="stylesheet" href="assets/css/bootstrap-grid.min.css" />
-		<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
-		<link rel="stylesheet" href="assets/css/style.css" />
-	</head>
+	<title>Document</title>
 
-	<body>
-		<header class="container-fluid" id="nav">
-			<div class="row">
-				<div class="col-2" id="title-logo">
-					<a href="index.html">WatchPad</a>
-				</div>
+	<link rel="stylesheet" href="assets/css/reset.css" />
+	<link rel="stylesheet" href="assets/css/bootstrap-grid.min.css" />
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
+	<link rel="stylesheet" href="assets/css/style.css" />
+</head>
 
-				<div class="col" id="search-bar">
-					<form action="#" class="searchForm">
-						<input type="text" name="query" id="search" placeholder="Search" />
-					</form>
-				</div>
-
-				<div class="col-2" id="dashboard-link">
-					<a href="#">Dashboard</a>
-				</div>
+<body>
+	<header class="container-fluid" id="nav">
+		<div class="row">
+			<div class="col-2" id="title-logo">
+				<a href="index.html">WatchPad</a>
 			</div>
-		</header>
 
-		<main class="container-fluid open" id="main-section" data-state="open">
-			<div id="filters">
-				<div class="sideBarTitle">
-					<span class="heading">Filters</span>
-					<div class="menuIcon" id="toggleSidebar"><span><</span></div>
-				</div>
-				<form>
-					<a class="nav-link" href="#">Filters</a>
+			<div class="col" id="search-bar">
+				<form action="#" class="searchForm">
+					<input type="text" name="query" id="search" placeholder="Search for movie or tv show">
 				</form>
 			</div>
 
-			<div id="content">
-				<div id="discoverCarousel" class="carousel"></div>
+			<div class="col-2" id="dashboard-link">
+				<a href="#">Dashboard</a>
 			</div>
 		</div>
 	</header>
 
-	<main class="container-fluid" id="main-section">
-		<div class="row">
-			<div class="col-2" id="filters">
-				<a class="nav-link" href="#">Example Link</a>
-			</div>
+	<main class="container-fluid open" id="main-section" data-state="open">
+		<div id="filters">
+			<div class="sideBarTitle">
+				<span class="heading">Filters</span>
+				<div class="menuIcon" id="toggleSidebar"><span>
+						<</span> </div> </div> <form>
+							<a class="nav-link" href="#">Filters</a>
+							</form>
+				</div>
 
-			<div class="col-10" id="content">
-				<h2>Trending</h2>
-				<div id="discoverCarousel" class="carousel">
+				<div id="content">
+					<div id="discoverCarousel" class="carousel"></div>
 				</div>
 			</div>
-		</div>
-	</main>
+			</header>
 
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+			<main class="container-fluid" id="main-section">
+				<div class="row">
+					<div class="col-2" id="filters">
+						<a class="nav-link" href="#">Example Link</a>
+					</div>
 
-		<script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+					<div class="col-10" id="content">
+						<h2>Trending</h2>
+						<div id="discoverCarousel" class="carousel">
+						</div>
+					</div>
+				</div>
+			</main>
 
-		<script src="assets/js/resources.js"></script>
-		<script src="assets/js/app.js"></script>
-	</body>
+			<script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+
+			<script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+
+			<script src="assets/js/resources.js"></script>
+			<script src="assets/js/app.js"></script>
+</body>
+
 </html>
