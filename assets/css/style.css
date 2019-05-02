@@ -12,3 +12,49 @@ h3 {
 	float: left;
 	height: 750px;
 }
+
+.poster{
+	position: relative;
+	width: 220px;
+	height: 330px;
+	display: inline-block;
+	margin: 10px;
+}
+.poster img {
+	position: absolute;
+	width: 100%;
+	transition: all 0.5s;
+}
+.poster > .imgBackdrop {
+	position: absolute;
+	width: 100%;
+	z-index: -1;
+	height: 100%;
+	background: #000
+}
+.posterBody{
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+.poster .posterTitle {
+	color: #fff;
+	transition: all 2s;
+}
+.poster:hover .posterTitle{
+	opacity: 1;
+}
+.poster:hover img{
+	opacity: 0.4;
+}
+.posterBody > .posterButtons {
+	display: flex;
+	align-content: stretch;
+	justify-content: space-between;
+	width: 100%;
+}
+.posterBody > .posterButtons > button {
+	flex-grow: 1;
+}
