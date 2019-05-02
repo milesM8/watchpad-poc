@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     // TMDB API Query call
     const tmdbQuery = (type, parameters = {}) => {
-        let queryURL = TMDB_URL
+        let queryURL = strings.TMDB_URL
         const requestData = { api_key: strings.TMDB_KEY }
 
         switch (type) {
@@ -43,12 +43,12 @@ $(document).ready(function () {
     const renderPoster = media => {
         const posterContainer = $("<div>")
 
-        const posterImage = $("<img>").attr("src", `${TMDB_URL}${media.poster_path}`)
+        const posterImage = $("<img>").attr("src", `${strings.TMDB_IMAGE_URL}${media.poster_path}`)
         const posterTitle = $("<h3>").text(media.title)
         const posterButtons = $("<div>")
-        const collectionButton = $("<button>").text(COLLECTION)
-        const watchListButton = $("<button>").text(WATCHLIST)
-        const ignoreButton = $("<button>").text(IGNORE)
+        const collectionButton = $("<button>").text(strings.COLLECTION)
+        const watchListButton = $("<button>").text(strings.WATCHLIST)
+        const ignoreButton = $("<button>").text(strings.IGNORE)
 
         posterButtons.append(collectionButton, watchListButton, ignoreButton)
         posterContainer.append(posterImage, posterTitle, posterButtons)
@@ -65,8 +65,10 @@ $(document).ready(function () {
     const discover = (type, page = 1) => {
         tmdbQuery(`discover${type}`, { page: page }).then(function (response) {
             for (media of response.results){
-                
+                $("#discoverCarousel").append(renderPoster(media))
             }
         })
     }
+
+    discover("Movie")
 })
