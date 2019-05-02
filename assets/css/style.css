@@ -112,14 +112,16 @@ a {
 	flex-grow: 1;
 }
 
-.carousel{
+.carousel {
 	white-space: nowrap;
 	overflow-x: auto;
 	width: 100%;
 }
-.carousel div{
+
+.carousel div {
 	white-space: normal;
 }
+
 #nav {
 	background-color: #1E212F;
 	height: 100px;
