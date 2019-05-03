@@ -1,5 +1,13 @@
 $(document).ready(function () {
 
+    const localStorageAdd = (type, data) => {
+
+    }
+
+    const localStorageGet = (type) => {
+
+    }
+
     // TMDB API Query call
     const tmdbQuery = (type, parameters = {}) => {
         let queryURL = strings.TMDB_URL
