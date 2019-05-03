@@ -1,7 +1,28 @@
 $(document).ready(function () {
 
+    // adds to the local storage list
     const localStorageAdd = (type, data) => {
+        switch (type) {
+            case "toCollection":
+                const currentCollection = localStorage.getItem("collection") || {}
+                localStorage.setItem("collection", { ...currentCollection, data })
+                return localStorage.getItem("collection")
+                break;
+            case "toWatchList":
+                const currentWatchList = localStorage.getItem("watchList") || {}
+                localStorage.setItem("watchList", { ...currentCollection, data })
+                return localStorage.getItem("watchList")
+                break;
+            case "toIgnore":
+                const currentIgnoreList = localStorage.getItem("ignoreList") || {}
+                localStorage.setItem("ignoreList", { ...currentCollection, data })
+                return localStorage.getItem("ignoreList")
+                break;
+            default:
+                return false
+                break;
 
+        }
     }
 
     const localStorageGet = (type) => {
@@ -86,7 +107,7 @@ $(document).ready(function () {
         container = $(container)
         container.empty();
         tmdbQuery(`discover${type}`, { page: page }).then(function (response) {
-            for (media of response.results){
+            for (media of response.results) {
                 container.append(renderPoster(media))
             }
         })
