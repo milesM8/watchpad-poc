@@ -41,17 +41,22 @@ $(document).ready(function () {
     }
 
     const renderPoster = media => {
-        const posterContainer = $("<div>")
+        const posterContainer = $("<div>").addClass("poster")
 
+        const posterImageBackdrop = $("<div>").addClass("imgBackdrop")
         const posterImage = $("<img>").attr("src", `${strings.TMDB_IMAGE_URL}${media.poster_path}`)
-        const posterTitle = $("<h3>").text(media.title)
-        const posterButtons = $("<div>")
+        posterImageBackdrop.append(posterImage)
+
+        const posterBody = $("<div>").addClass("posterBody")
+        const posterTitle = $("<h3>").text(media.title).addClass("posterTitle")
+        const posterButtons = $("<div>").addClass("posterButtons")
         const collectionButton = $("<button>").text(strings.COLLECTION)
         const watchListButton = $("<button>").text(strings.WATCHLIST)
         const ignoreButton = $("<button>").text(strings.IGNORE)
 
         posterButtons.append(collectionButton, watchListButton, ignoreButton)
-        posterContainer.append(posterImage, posterTitle, posterButtons)
+        posterBody.append(posterTitle, posterButtons)
+        posterContainer.append(posterImageBackdrop, posterBody)
 
         return posterContainer
     }
