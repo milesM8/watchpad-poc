@@ -69,7 +69,7 @@ $(document).ready(function() {
 				break;
 			case "search":
 				queryURL += `/search/multi`;
-				break;
+                break;
 		}
 
 		return (query = $.ajax({
@@ -80,6 +80,7 @@ $(document).ready(function() {
 		}));
 	};
 
+    //renders and individual poster
 	const renderPoster = media => {
 		const posterContainer = $("<div>").addClass("poster");
 
@@ -105,7 +106,6 @@ $(document).ready(function() {
 
     // takes a search query and adds the result to a given container
     const search = (query, container, page = 1) => {
-        container = $(container)
         container.empty();
         tmdbQuery("search", { query: query, page: page }).then(function (response) {
             for (media of response.results) {
@@ -116,13 +116,46 @@ $(document).ready(function() {
 
     // renders the trending movies to a given container
     const discover = (type, container, page = 1) => {
-        container = $(container)
         container.empty();
-        tmdbQuery(`discover${type}`, { page: page }).then(function (response) {
+        tmdbQuery(type, { page: page }).then(function (response) {
             for (media of response.results) {
                 container.append(renderPoster(media))
             }
         })
+    }
+
+    const handlePageChange = (view, parameters = {}) => {
+        const carousel = $("<div>").addClass("carousel")
+        const content = $("#content")
+        content.empty()
+        const watchListCarousel = $("<div>").addClass("carousel").attr("id", "watchListCarousel")
+        const queueCarousel = $("<div>").addClass("carousel").attr("id", "queueCarousel")
+
+        if (view === "dashboardEmpty") view = "discoverMovie";
+        if (!parameters.page) parameters.page = 1
+
+        switch (view) {
+            case "discoverTV":
+            case "discoverMovie":
+                const discoverDiv = $("<div>")
+                discover(view, discoverDiv, parameters.page)
+                content.html(discoverDiv)
+                break;
+            case "search":
+                const searchDiv = $("<div>")
+                search(parameters.query, searchDiv, parameters.page)
+                content.html(searchDiv)
+                break;
+            case "dashboard":
+                break;
+            case "watchList":
+                break;
+            case "collection":
+                const collectionContainer = $("<div>").attr("id", "collectionContainer")
+                break;
+            case "queue":
+                break;
+        }
     }
 
     $("#toggleSidebar").click(function (e) {
@@ -138,12 +171,16 @@ $(document).ready(function() {
         }
     })
 
-    discover("Movie", "#discoverCarousel")
+    $(document).on("click", ".viewLink", function(){
+        const button = $(this)
+        const page = (button.attr("data-page")) ? button.attr("data-page") : 1;
+        handlePageChange(button.attr("data-view"), { page: page })
+    })
 
     $("#searchForm").submit(function(e) {
 		e.preventDefault();
 
-		const searchTerm = $("#search").val();
-        search(searchTerm, "#discoverCarousel");
+        const searchTerm = $("#search").val();
+        handlePageChange("search", { query: searchTerm})
 	});
 })
