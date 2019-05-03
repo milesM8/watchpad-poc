@@ -103,23 +103,6 @@ $(document).ready(function() {
 		return posterContainer;
 	};
 
-	const search = function(query, page = 1) {
-		tmdbQuery("search", { query: query, page: page }).then(function(response) {
-			$("#searchPage").hide();
-			$("#trendingPage").hide();
-			$("#searchPage").html(JSON.stringify(response.results));
-			$("#searchPage").show();
-		});
-	};
-
-	const discover = (type, page = 1) => {
-		tmdbQuery(`discover${type}`, { page: page }).then(function(response) {
-			for (media of response.results) {
-				$("#discoverCarousel").append(renderPoster(media));
-			}
-		});
-	};
-
     // takes a search query and adds the result to a given container
     const search = (query, container, page = 1) => {
         container = $(container)
@@ -154,12 +137,13 @@ $(document).ready(function() {
             main.addClass("open")
         }
     })
+
     discover("Movie", "#discoverCarousel")
 
-    $("#search-button").click(function(e) {
+    $("#searchForm").submit(function(e) {
 		e.preventDefault();
 
 		const searchTerm = $("#search").val();
-		search(searchTerm);
+        search(searchTerm, "#discoverCarousel");
 	});
 })
