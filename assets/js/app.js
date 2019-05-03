@@ -68,8 +68,6 @@ $(document).ready(function() {
 			$("#trendingPage").hide();
 			$("#searchPage").html(JSON.stringify(response.results));
 			$("#searchPage").show();
-
-			}
 		});
 	};
 
