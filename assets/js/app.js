@@ -40,6 +40,7 @@ $(document).ready(function () {
         });
     }
 
+    //renders a single poster
     const renderPoster = media => {
         const posterContainer = $("<div>").addClass("poster")
 
@@ -61,19 +62,27 @@ $(document).ready(function () {
         return posterContainer
     }
 
-    const search = (query, page = 1) => {
+    // takes a search query and adds the result to a given container
+    const search = (query, container, page = 1) => {
+        container = $(container)
+        container.empty();
         tmdbQuery("search", { query: query, page: page }).then(function (response) {
-            console.log(response);
-        })
-    }
-
-    const discover = (type, page = 1) => {
-        tmdbQuery(`discover${type}`, { page: page }).then(function (response) {
-            for (media of response.results){
-                $("#discoverCarousel").append(renderPoster(media))
+            for (media of response.results) {
+                container.append(renderPoster(media))
             }
         })
     }
 
-    discover("Movie")
+    // renders the trending movies to a given container
+    const discover = (type, container, page = 1) => {
+        container = $(container)
+        container.empty();
+        tmdbQuery(`discover${type}`, { page: page }).then(function (response) {
+            for (media of response.results){
+                container.append(renderPoster(media))
+            }
+        })
+    }
+
+    discover("Movie", "#discoverCarousel")
 })
