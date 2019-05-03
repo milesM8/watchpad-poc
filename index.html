@@ -10,23 +10,30 @@
 		<link rel="stylesheet" href="assets/css/reset.css" />
 		<link rel="stylesheet" href="assets/css/bootstrap-grid.min.css" />
 		<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
+		<link
+			rel="stylesheet"
+			href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+			integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+			crossorigin="anonymous"
+		/>
 		<link rel="stylesheet" href="assets/css/style.css" />
 	</head>
 
 	<body>
 		<header class="container-fluid" id="nav">
 			<div class="row">
-				<div class="col-2" id="title-logo">
+				<div class="col" id="title-logo">
 					<a href="index.html">WatchPad</a>
 				</div>
 
 				<div class="col" id="search-bar">
 					<form action="#" class="searchForm">
 						<input type="text" name="query" id="search" placeholder="Search for movie or tv show" />
+						<button id="search-button"><i class="fas fa-search"></i></button>
 					</form>
 				</div>
 
-				<div class="col-2" id="dashboard-link">
+				<div class="col" id="dashboard-link">
 					<a href="#">Dashboard</a>
 				</div>
 			</div>
@@ -124,8 +131,11 @@
 			</div>
 
 			<div id="content">
-				<h1>Trending</h1>
-				<div id="discoverCarousel" class="carousel"></div>
+				<div id="trendingPage">
+					<h1>Trending</h1>
+					<div id="discoverCarousel" class="carousel"></div>
+				</div>
+				<div id="searchPage"></div>
 			</div>
 		</main>
 
