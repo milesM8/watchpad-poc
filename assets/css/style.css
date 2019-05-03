@@ -1,56 +1,112 @@
-h3 {
-	color: black;
+html, body {
+	height: 100vh;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color: #1B1E2C;
+	font-family: 'Open Sans', sans-serif;
+	color: #ccc;
+}
+
+a {
+	text-decoration: none;
+	color: #ccc;
+}
+
+#nav {
+	background-color: #1E212F;
+	height: 80px;
+	line-height: 80px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#title-logo {
 	text-align: center;
-	float: left;
+	font-weight: 600;
+	font-size: 28px;
 }
 
-.card {
-	padding: 0px;
+#search-bar {
+	padding: 0 20px;
 }
 
-.sidebar {
-	float: left;
-	height: 750px;
+.searchForm {}
+
+#dashboard-link {
+	text-align: right;
+	padding: 0 20px;
 }
 
-.poster{
+.row {
+	height: 100vh;
+}
+
+#filters {
+	background-color: #222536;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	height: 100%!important;
+}
+
+.poster {
 	position: relative;
 	display: inline-block;
 	margin: 10px;
-	overflow: auto;
 }
+
 .poster img {
 	width: 200px;
 	transition: all 0.5s;
 }
-.poster > .imgBackdrop {
+
+.poster>.imgBackdrop {
 	z-index: -1;
 	background: #000;
-	overflow: auto;
 }
-.posterBody{
+
+.posterBody {
 	position: absolute;
 	bottom: 0;
 	width: 100%;
 	display: flex;
 	flex-direction: column;
 }
+
 .poster .posterTitle {
 	color: #fff;
 	transition: all 2s;
 }
-.poster:hover .posterTitle{
+
+.poster:hover .posterTitle {
 	opacity: 1;
 }
-.poster:hover img{
+
+.poster:hover img {
 	opacity: 0.4;
 }
-.posterBody > .posterButtons {
+
+.posterBody>.posterButtons {
 	display: flex;
 	align-content: stretch;
 	justify-content: space-between;
 	width: 100%;
 }
-.posterBody > .posterButtons > button {
+
+.posterBody>.posterButtons>button {
 	flex-grow: 1;
+}
+
+.carousel{
+	white-space: nowrap;
+	overflow-x: auto;
+	width: 100%;
+}
+.carousel div{
+	white-space: normal;
+}
+#nav {
+	background-color: #1E212F;
+	height: 100px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
