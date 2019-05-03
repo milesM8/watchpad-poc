@@ -21,12 +21,25 @@ $(document).ready(function () {
             default:
                 return false
                 break;
-
         }
     }
 
+    // gets currently stored lists
     const localStorageGet = (type) => {
-
+        switch (type) {
+            case "collection":
+                return localStorage.getItem("collection") || {}
+                break;
+            case "watchList":
+                return localStorage.getItem("watchList") || {}
+                break;
+            case "ignore":
+                return localStorage.getItem("ignoreList") || {}
+                break;
+            default:
+                return false
+                break;
+        }
     }
 
     // TMDB API Query call
