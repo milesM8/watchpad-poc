@@ -97,6 +97,8 @@ $(document).ready(function () {
         const watchListButton = $("<button>").text(strings.WATCHLIST)
         const ignoreButton = $("<button>").text(strings.IGNORE)
 
+        
+
         posterButtons.append(collectionButton, watchListButton, ignoreButton)
         posterBody.append(posterTitle, posterButtons)
         posterContainer.append(posterImageBackdrop, posterBody)
@@ -126,5 +128,17 @@ $(document).ready(function () {
         })
     }
 
+    $("#toggleSidebar").click(function (e) {
+        const main = $("#main-section")
+        if (main.attr("data-state") === "open") {
+            main.attr("data-state", "closed")
+            main.removeClass("open")
+            main.addClass("closed")
+        }else{
+            main.attr("data-state", "open")
+            main.removeClass("closed")
+            main.addClass("open")
+        }
+    })
     discover("Movie", "#discoverCarousel")
 })

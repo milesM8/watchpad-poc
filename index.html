@@ -1,56 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Document</title>
 
-	<title>Document</title>
+		<link rel="stylesheet" href="assets/css/reset.css" />
+		<link rel="stylesheet" href="assets/css/bootstrap-grid.min.css" />
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
+		<link rel="stylesheet" href="assets/css/style.css" />
+	</head>
 
-	<link rel="stylesheet" href="assets/css/reset.css">
-	<link rel="stylesheet" href="assets/css/bootstrap-grid.min.css" />
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-	<link rel="stylesheet" href="assets/css/style.css" />
-</head>
+	<body>
+		<header class="container-fluid" id="nav">
+			<div class="row">
+				<div class="col-2" id="title-logo">
+					<a href="index.html">WatchPad</a>
+				</div>
 
-<body>
-	<header class="container-fluid" id="nav">
-		<div class="row">
+				<div class="col" id="search-bar">
+					<form action="#" class="searchForm">
+						<input type="text" name="query" id="search" placeholder="Search" />
+					</form>
+				</div>
 
-			<div class="col-3" id="title-logo">
-				<a href="index.html">watchPad</a>
+				<div class="col-2" id="dashboard-link">
+					<a href="#">Dashboard</a>
+				</div>
 			</div>
+		</header>
 
-			<div class="col" id="search-bar">
-				<form action="#" class="searchForm">
-					<input type="text" name="query" placeholder="Search">
+		<main class="container-fluid open" id="main-section" data-state="open">
+			<div id="filters">
+				<div class="sideBarTitle">
+					<span class="heading">Filters</span>
+					<div class="menuIcon" id="toggleSidebar"><span><</span></div>
+				</div>
+				<form id="filtersForm">
+					<div class="movie-or-tv-box">
+						<input type="checkbox" name="movie-tv-checkbox" id="filterMovie" value="filter-movie" /> filter by movie<br />
+						<input type="checkbox" name="movie-tv-checkbox" id="filterTV" value="filter-tv" /> filter by television<br />
+					</div>
+					<div class="genre">
+						<div>
+							<input type="checkbox" value="28,12,10759" id="actionCB" />
+							<label for="actionCB">Action & Adventure</label>
+						</div>
+						<div>
+							<input type="checkbox" value="16" id="animationCB" />
+							<label for="AnimationCB">Animation</label>
+						</div>
+						<div>
+							<input type="checkbox" value="35" id="comedy" />
+							<label for="ComedyCB">Comedy</label>
+						</div>
+						<div>
+							<input type="checkbox" value="80" id="crimeCB" />
+							<label for="CrimeCB">Crime</label>
+						</div>
+						<div>
+							<input type="checkbox" value="99" id="documentaryCB" />
+							<label for="DocumentaryCB">Documentary</label>
+						</div>
+						<div>
+							<input type="checkbox" value="18" id="dramaCB" />
+							<label for="DramaCB">Drama</label>
+						</div>
+						<div>
+							<input type="checkbox" value="10751" id="familyCB" />
+							<label for="FamilyCB">Family</label>
+						</div>
+						<div>
+							<input type="checkbox" value="10762" id="kidsCB" />
+							<label for="KidsCB">Kids</label>
+						</div>
+						<div>
+							<input type="checkbox" value="9648" id="mysteryCB" />
+							<label for="MysteryCB">Mystery</label>
+						</div>
+						<div>
+							<input type="checkbox" value="878,14,10765" id="scififantasyCB" />
+							<label for="Sci-Fi & FantasyCB">Sci-Fi & Fantasy</label>
+						</div>
+						<div>
+							<input type="checkbox" value="10767" id="talkCB" />
+							<label for="TalkCB">Talk</label>
+						</div>
+						<div>
+							<input type="checkbox" value="10763" id="newsCB" />
+							<label for="NewsCB">News</label>
+						</div>
+						<div>
+							<input type="checkbox" value="10764" id="realityCB" />
+							<label for="RealityCB">Reality</label>
+						</div>
+						<div>
+							<input type="checkbox" value="10766" id="soapCB" />
+							<label for="SoapCB">Soap</label>
+						</div>
+						<div>
+							<input type="checkbox" value="10768,10752" id="warCB" />
+							<label for="War & PoliticsCB">War & Politics</label>
+						</div>
+						<div>
+							<input type="checkbox" value="37" id="westernCB" />
+							<label for="WesternCB">Western</label>
+						</div>
+					</div>
+					<label>year</label>
+					<div class="filter-year">
+						<input type="number" id="yearInput" />
+					</div>
+					<div class="sort">
+						<input type="checkbox" id="sortName" /><label>by name</label><input type="checkbox" id="sortDirection" /><br />
+						<input type="checkbox" id="sortReleaseDate" /><label>release date</label>
+						<input type="checkbox" id="sortDirection" /><br />
+						<input type="checkbox" id="sortPopularity" /><label>popularity</label>
+						<input type="checkbox" id="sortDirection" /><br />
+					</div>
 				</form>
 			</div>
 
-			<div class="col" id="dashboard-link">
-				<a href="#">Dashboard</a>
+			<div id="content">
+				<div id="discoverCarousel" class="carousel"></div>
 			</div>
-		</div>
-	</header>
+		</main>
 
-	<main class="container-fluid" id="main-section">
-		<div class="row">
-			<div class="col-3" id="filters">
-				<a class="nav-link" href="#">Example Link</a>
-			</div>
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
 
-			<div class="col-9" id="content">
-				<div id="discoverCarousel" class="carousel">
-				</div>
-			</div>
-		</div>
-	</main>
-
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
-
-	<script src="assets/js/resources.js"></script>
-	<script src="assets/js/app.js"></script>
-</body>
-
+		<script src="assets/js/resources.js"></script>
+		<script src="assets/js/app.js"></script>
+	</body>
 </html>
