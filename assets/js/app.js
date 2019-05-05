@@ -1,51 +1,67 @@
-$(document).ready(function() {		
-    // adds to the local storage list
-    const localStorageAdd = (type, data) => {
-        switch (type) {
-            case "toCollection":
-                const currentCollection = localStorage.getItem("collection") || {}
-                localStorage.setItem("collection", { ...currentCollection, data })
-                return localStorage.getItem("collection")
-                break;
-            case "toWatchList":
-                const currentWatchList = localStorage.getItem("watchList") || {}
-                localStorage.setItem("watchList", { ...currentCollection, data })
-                return localStorage.getItem("watchList")
-                break;
-            case "toIgnore":
-                const currentIgnoreList = localStorage.getItem("ignoreList") || {}
-                localStorage.setItem("ignoreList", { ...currentCollection, data })
-                return localStorage.getItem("ignoreList")
-                break;
-            default:
-                return false
-                break;
-        }
-    }
+$(document).ready(function() {
+	// adds to the local storage list
+	const localStorageAdd = (type, data) => {
+		switch (type) {
+			case "toCollection":
+				const currentCollection = localStorage.getItem("collection") ? JSON.parse(localStorage.getItem("collection")) : [];
+				let match = currentCollection.find(obj => {
+					return obj.name === data.name;
+				});
+				if (match) return false;
+				currentCollection.push(data);
+				localStorage.setItem("collection", JSON.stringify(currentCollection));
+				return JSON.parse(localStorage.getItem("collection"));
+				break;
+			case "toWatchList":
+				const currentWatchList = localStorage.getItem("watchList") ? JSON.parse(localStorage.getItem("watchList")) : [];
+				let match2 = currentWatchList.find(obj => {
+					return obj.name === data.name;
+				});
+				if (match2) return false;
+				currentWatchList.push(data);
+				localStorage.setItem("watchList", JSON.stringify(currentWatchList));
+				return JSON.parse(localStorage.getItem("watchList"));
+				break;
+			case "toIgnore":
+				const currentIgnoreList = localStorage.getItem("ignoreList") ? JSON.parse(localStorage.getItem("ignoreList")) : [];
+				let match3 = currentIgnoreList.find(obj => {
+					return obj.name === data.name;
+				});
+				if (match3) return false;
+				currentIgnoreList.push(data);
+				localStorage.setItem("ignoreList", JSON.stringify(currentIgnoreList));
+				return JSON.parse(localStorage.getItem("ignoreList"));
+				break;
+			default:
+				return false;
+				break;
+		}
+	};
 
-    // gets currently stored lists
-    const localStorageGet = (type) => {
-        switch (type) {
-            case "collection":
-                return localStorage.getItem("collection") || {}
-                break;
-            case "watchList":
-                return localStorage.getItem("watchList") || {}
-                break;
-            case "ignore":
-                return localStorage.getItem("ignoreList") || {}
-                break;
-            default:
-                return false
-                break;
-        }
-    }
+	// gets currently stored lists
+	const localStorageGet = type => {
+		switch (type) {
+			case "collection":
+				return localStorage.getItem("collection") ? JSON.parse(localStorage.getItem("collection")) : [];
+				break;
+			case "watchList":
+				return localStorage.getItem("watchList") ? JSON.parse(localStorage.getItem("watchList")) : [];
+				break;
+			case "ignore":
+				return localStorage.getItem("ignoreList") ? JSON.parse(localStorage.getItem("ignoreList")) : [];
+				break;
+			default:
+				return false;
+				break;
+		}
+	};
 
-    // TMDB API Query call
-    const tmdbQuery = (type, parameters = {}) => {
-        let queryURL = strings.TMDB_URL
-        const requestData = { api_key: strings.TMDB_KEY }
-        switch (type) {
+	// TMDB API Query call
+	const tmdbQuery = (type, parameters = {}) => {
+		let queryURL = strings.TMDB_URL;
+		const requestData = { api_key: strings.TMDB_KEY };
+
+		switch (type) {
 			case "discoverMovie":
 				queryURL += "/discover/movie";
 				break;
@@ -69,7 +85,9 @@ $(document).ready(function() {
 				break;
 			case "search":
 				queryURL += `/search/multi`;
-                break;
+				break;
+			default:
+				return;
 		}
 
 		return (query = $.ajax({
@@ -80,7 +98,7 @@ $(document).ready(function() {
 		}));
 	};
 
-    //renders and individual poster
+	//renders a single poster
 	const renderPoster = media => {
 		const posterContainer = $("<div>").addClass("poster");
 
@@ -93,9 +111,21 @@ $(document).ready(function() {
 			.text(media.title)
 			.addClass("posterTitle");
 		const posterButtons = $("<div>").addClass("posterButtons");
-		const collectionButton = $("<button>").text(strings.COLLECTION);
-		const watchListButton = $("<button>").text(strings.WATCHLIST);
-		const ignoreButton = $("<button>").text(strings.IGNORE);
+		const collectionButton = $("<button>")
+			.addClass("addToCollection")
+			.attr("data-name", media.title)
+			.attr("data-id", media.id)
+			.text(strings.COLLECTION);
+		const watchListButton = $("<button>")
+			.addClass("addToWatchList")
+			.attr("data-name", media.title)
+			.attr("data-id", media.id)
+			.text(strings.WATCHLIST);
+		const ignoreButton = $("<button>")
+			.addClass("addToIgnore")
+			.attr("data-name", media.title)
+			.attr("data-id", media.id)
+			.text(strings.IGNORE);
 
 		posterButtons.append(collectionButton, watchListButton, ignoreButton);
 		posterBody.append(posterTitle, posterButtons);
@@ -104,27 +134,27 @@ $(document).ready(function() {
 		return posterContainer;
 	};
 
-    // takes a search query and adds the result to a given container
-    const search = (query, container, page = 1) => {
-        container.empty();
-        tmdbQuery("search", { query: query, page: page }).then(function (response) {
-            for (media of response.results) {
-                container.append(renderPoster(media))
-            }
-        })
-    }
+	// takes a search query and adds the result to a given container
+	const search = (query, container, page = 1) => {
+		container.empty();
+		tmdbQuery("search", { query: query, page: page }).then(function(response) {
+			for (media of response.results) {
+				container.append(renderPoster(media));
+			}
+		});
+	};
 
-    // renders the trending movies to a given container
-    const discover = (type, container, page = 1) => {
-        container.empty();
-        tmdbQuery(type, { page: page }).then(function (response) {
-            for (media of response.results) {
-                container.append(renderPoster(media))
-            }
-        })
-    }
+	// renders the trending movies to a given container
+	const discover = (type, container, page = 1) => {
+		container.empty();
+		tmdbQuery(type, { page: page }).then(function(response) {
+			for (media of response.results) {
+				container.append(renderPoster(media));
+			}
+		});
+	};
 
-    const handlePageChange = (view, parameters = {}) => {
+	const handlePageChange = (view, parameters = {}) => {
         const carousel = $("<div>").addClass("carousel")
         const content = $("#content")
         content.empty()
@@ -177,10 +207,18 @@ $(document).ready(function() {
         handlePageChange(button.attr("data-view"), { page: page })
     })
 
-    $("#searchForm").submit(function(e) {
-		e.preventDefault();
+	handlePageChange("discoverMovie");
 
-        const searchTerm = $("#search").val();
-        handlePageChange("search", { query: searchTerm})
+	$(document).on("click", ".addToWatchList", function() {
+		const button = $(this);
+		localStorageAdd("toWatchList", { name: button.attr("data-name"), id: button.attr("data-id"), date: new Date() });
 	});
-})
+	$(document).on("click", ".addToCollection", function() {
+		const button = $(this);
+		localStorageAdd("toCollection", { name: button.attr("data-name"), id: button.attr("data-id"), date: new Date() });
+	});
+	$(document).on("click", ".addToIgnore", function() {
+		const button = $(this);
+		localStorageAdd("toIgnore", { name: button.attr("data-name"), id: button.attr("data-id"), date: new Date() });
+	});
+});
