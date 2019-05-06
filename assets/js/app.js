@@ -154,6 +154,16 @@ $(document).ready(function () {
 		});
 	};
 
+	// renders the watch list to a given container
+	const watchList = (list, container) => {
+		container.empty();
+		for (movie of list) {
+			tmdbQuery("movie", { movie_id: movie.id }).then(function (response) {
+				container.append(renderPoster(response));
+			});
+		}
+	};
+
 	const handlePageChange = (view, parameters = {}) => {
 		const carousel = $("<div>").addClass("carousel")
 		const content = $("#content")
@@ -179,6 +189,11 @@ $(document).ready(function () {
 			case "dashboard":
 				break;
 			case "watchList":
+				storedWatchList = localStorageGet("watchList")
+				if (storedWatchList !== []) {
+					watchList(storedWatchList, watchListCarousel)
+					content.append(watchListCarousel)
+				}
 				break;
 			case "collection":
 				const collectionContainer = $("<div>").attr("id", "collectionContainer")
