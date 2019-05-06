@@ -99,7 +99,7 @@ $(document).ready(function () {
 	};
 
 	//renders a single poster
-	const renderPoster = media => {
+	const renderPoster = (media, mediaType) => {
 		const posterContainer = $("<div>").addClass("poster");
 
 		const posterImageBackdrop = $("<div>").addClass("imgBackdrop");
@@ -113,17 +113,20 @@ $(document).ready(function () {
 		const posterButtons = $("<div>").addClass("posterButtons");
 		const collectionButton = $("<button>")
 			.addClass("addToCollection")
-			.attr("data-name", media.title)
+            .attr("data-name", media.title)
+            .attr("data-media-type", mediaType)
 			.attr("data-id", media.id)
 			.text(strings.COLLECTION);
 		const watchListButton = $("<button>")
 			.addClass("addToWatchList")
-			.attr("data-name", media.title)
+            .attr("data-name", media.title)
+            .attr("data-media-type", mediaType)
 			.attr("data-id", media.id)
 			.text(strings.WATCHLIST);
 		const ignoreButton = $("<button>")
-			.addClass("addToIgnore")
-			.attr("data-name", media.title)
+            .addClass("addToIgnore")
+            .attr("data-name", media.title)
+            .attr("data-media-type", mediaType)
 			.attr("data-id", media.id)
 			.text(strings.IGNORE);
 
@@ -168,8 +171,6 @@ $(document).ready(function () {
 		const carousel = $("<div>").addClass("carousel")
 		const content = $("#content")
 		content.empty()
-		const watchListCarousel = $("<div>").addClass("carousel").attr("id", "watchListCarousel")
-		const queueCarousel = $("<div>").addClass("carousel").attr("id", "queueCarousel")
 
 		if (view === "dashboardEmpty") view = "discoverMovie";
 		if (!parameters.page) parameters.page = 1
@@ -189,7 +190,8 @@ $(document).ready(function () {
 			case "dashboard":
 				break;
 			case "watchList":
-				storedWatchList = localStorageGet("watchList")
+                storedWatchList = localStorageGet("watchList")
+                const watchListCarousel = carousel
 				if (storedWatchList !== []) {
 					watchList(storedWatchList, watchListCarousel)
 					content.append(watchListCarousel)
