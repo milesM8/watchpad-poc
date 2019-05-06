@@ -62,7 +62,7 @@ $(document).ready(function () {
         const requestData = { api_key: strings.TMDB_KEY };
         let mediaType;
 
-        console.log(type, parameters);
+        parameters.region = "US"
 
         switch (type) {
             case "discoverMovie":
@@ -184,6 +184,9 @@ $(document).ready(function () {
 
     const handlePageChange = (view, parameters = {}) => {
         const carousel = $("<div>").addClass("carousel")
+        const section = heading => {
+            return $("<div>").append($("<h2>").text(heading))
+        }
         const content = $("#content")
         content.empty()
 
@@ -195,30 +198,30 @@ $(document).ready(function () {
             case "discoverMovie":
                 const discoverDiv = $("<div>");
                 discover(view, discoverDiv, parameters.page);
-                content.html(discoverDiv);
+                content.html(section("Discover Movies").append(discoverDiv));
                 break;
             case "search":
                 const searchDiv = $("<div>");
                 search(parameters.query, searchDiv, parameters.page);
-                content.html(searchDiv);
+                content.html(section("Search Results").append(searchDiv));
                 break;
             case "dashboard":
                 const watchListCarousel = carousel
                 storedWatchList = localStorageGet("watchList")
                 if (storedWatchList !== []) {
                     watchList(storedWatchList, watchListCarousel);
-                    content.append(watchListCarousel);
+                    content.append(section("Watch List").append(watchListCarousel));
                 }
                 const dashboardDiv = $("<div>");
                 discover("discoverMovie", dashboardDiv, parameters.page);
-                content.append(dashboardDiv);
+                content.append(section("Discover Movies").append(dashboardDiv));
                 break;
             case "watchList":
                 storedWatchList = localStorageGet("watchList")
                 const watchListDiv = $("<div>");
                 if (storedWatchList !== []) {
                     watchList(storedWatchList, watchListDiv);
-                    content.append(watchListDiv);
+                    content.append(section("Watch List").append(watchListDiv));
                 }
                 break;
             case "collection":
