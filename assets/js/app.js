@@ -251,7 +251,7 @@ $(document).ready(function () {
         handlePageChange(button.attr("data-view"), { page: page });
     });
 
-    handlePageChange("discoverMovie");
+    handlePageChange("dashboard");
 
     $(document).on("click", ".addToWatchList", function () {
         const button = $(this);
