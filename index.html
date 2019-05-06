@@ -10,39 +10,59 @@
 		<link rel="stylesheet" href="assets/css/reset.css" />
 		<link rel="stylesheet" href="assets/css/bootstrap-grid.min.css" />
 		<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
+		<link
+			rel="stylesheet"
+			href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+			integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+			crossorigin="anonymous"
+		/>
 		<link rel="stylesheet" href="assets/css/style.css" />
 	</head>
 
 	<body>
 		<header class="container-fluid" id="nav">
 			<div class="row">
-				<div class="col-2" id="title-logo">
-					<a href="index.html">WatchPad</a>
+				<div class="col" id="title-logo">
+					<a href="index.html">watch<span id="color-change">Pad</span></a>
 				</div>
 
 				<div class="col" id="search-bar">
-					<form action="#" class="searchForm">
+					<form action="#" id="searchForm">
 						<input type="text" name="query" id="search" placeholder="Search for movie or tv show" />
+						<button id="search-button" type="submit"><i class="fas fa-search"></i></button>
 					</form>
 				</div>
 
-				<div class="col-2" id="dashboard-link">
-					<a href="#">Dashboard</a>
+				<div class="col" id="dashboard-link">
+					<a href="#" class="viewLink" data-view="discoverMovie">Dashboard</a>
+					<a href="#" class="viewLink" data-view="watchList">Watch List</a>
 				</div>
 			</div>
 		</header>
 
-		<main class="container-fluid open" id="main-section" data-state="open">
+		<main class="container-fluid closed" id="main-section" data-state="closed">
 			<div id="filters">
 				<div class="sideBarTitle">
-					<span class="heading">Filters</span>
-					<div class="menuIcon" id="toggleSidebar"><span> <</span></div>
+					<h3 class="heading">Filters</h3>
+					<div class="menuIcon" id="toggleSidebar">
+						<span><i class="fas fa-bars"></i></span>
+					</div>
 				</div>
 				<form id="filtersForm">
+					<div class="sort">
+						<h4 id="sortby-filter">Sort By</h4>
+						<input type="checkbox" id="sortName" /><label>by name</label><input type="checkbox" id="sortDirection" /><br />
+						<input type="checkbox" id="sortReleaseDate" /><label>release date</label>
+						<input type="checkbox" id="sortDirection" /><br />
+						<input type="checkbox" id="sortPopularity" /><label>popularity</label>
+						<input type="checkbox" id="sortDirection" /><br />
+					</div>
+					<h4 id="type-filter">Type</h4>
 					<div class="movie-or-tv-box">
 						<input type="checkbox" name="movie-tv-checkbox" id="filterMovie" value="filter-movie" /> filter by movie<br />
 						<input type="checkbox" name="movie-tv-checkbox" id="filterTV" value="filter-tv" /> filter by television<br />
 					</div>
+					<h4 id="genre-filter">Genre</h4>
 					<div class="genre">
 						<div>
 							<input type="checkbox" value="28,12,10759" id="actionCB" />
@@ -113,20 +133,10 @@
 					<div class="filter-year">
 						<input type="number" id="yearInput" />
 					</div>
-					<div class="sort">
-						<input type="checkbox" id="sortName" /><label>by name</label><input type="checkbox" id="sortDirection" /><br />
-						<input type="checkbox" id="sortReleaseDate" /><label>release date</label>
-						<input type="checkbox" id="sortDirection" /><br />
-						<input type="checkbox" id="sortPopularity" /><label>popularity</label>
-						<input type="checkbox" id="sortDirection" /><br />
-					</div>
 				</form>
 			</div>
 
-			<div id="content">
-				<h1>Trending</h1>
-				<div id="discoverCarousel" class="carousel"></div>
-			</div>
+			<div id="content"></div>
 		</main>
 
 		<script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>

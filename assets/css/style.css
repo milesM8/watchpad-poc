@@ -7,7 +7,7 @@ main,
 }
 
 body {
-	background-color: #1b1e2c;
+	background: #191927;
 	font-family: "Open Sans", sans-serif;
 	color: #ccc;
 }
@@ -18,39 +18,72 @@ a {
 }
 
 #nav {
-	background-color: #1e212f;
+	background-color: #181826;
 	height: 80px;
 	line-height: 80px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	position: fixed;
 	z-index: 999;
 }
 
 #title-logo {
 	text-align: left;
-	font-weight: 600;
-	font-size: 40px;
-	padding-left: 30px;
+	font-weight: 100;
+	font-size: 28px;
+	padding: 0 60px;
+	max-width: 250px;
+}
+
+#color-change {
+	font-weight: 800;
+	color: #2ebada;
+}
+
+h3 {
+	font-size: 16px;
+}
+
+h4 {
+	font-size: 14px;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
 }
 
 #search-bar {
-	padding: 0 40px;
+	padding-left: 40px;
 }
 
 #search {
-	width: 420px;
+	width: 400px;
 	padding: 30px 0 7px 0;
 	font-size: 16px;
+	color: #ccc;
 	border: none;
 	border-bottom: 1px solid #666;
 	background: none;
 	outline: none;
 }
 
+#search-button {
+	height: 30px;
+	width: 30px;
+	background: none;
+	border: none;
+	border-bottom: 1px solid #666;
+	outline: none;
+	margin-left: -5px;
+}
+
+.fas,
+.fa-search {
+	color: #ccc;
+	font-size: 14px;
+}
+
 #dashboard-link {
 	text-align: right;
 	padding: 0 55px;
 }
+
 .sideBarTitle {
 	text-align: center;
 	font-weight: 600;
@@ -61,6 +94,7 @@ a {
 	display: flex;
 	justify-content: space-between;
 }
+
 .menuIcon {
 	text-align: center;
 	display: inline-block;
@@ -71,21 +105,29 @@ a {
 	transition: all 0.5s;
 	user-select: none;
 }
+
 .menuIcon:hover {
 	color: #b70707;
 }
+
 #main-section {
 	padding: 0;
 	margin: 0;
 	display: flex;
 }
+
 #filters {
-	background-color: #222536;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	background: rgb(25, 25, 38);
+	background: linear-gradient(180deg, rgba(25, 25, 38, 1) 10%, rgba(47, 47, 63, 1) 100%);
 	height: 100% !important;
 	transition: all 0.5s;
 	padding-top: 85px;
 }
+
+#filtersForm {
+	margin: 20px;
+}
+
 #content {
 	margin-top: 100px;
 	transition: all 0.5s;
@@ -95,6 +137,7 @@ a {
 #main-section.open #filters {
 	width: 250px;
 }
+
 #main-section.open #content {
 	width: calc(100vw - 250px);
 }
@@ -102,16 +145,20 @@ a {
 #main-section.closed #filters {
 	width: 50px;
 }
+
 #main-section.closed #filters form {
 	visibility: hidden;
 	width: 0;
 }
+
 #main-section.closed #content {
 	width: calc(100vw - 50px);
 }
+
 #main-section.closed .menuIcon {
 	transform: rotate(180deg);
 }
+
 #main-section.closed .sideBarTitle .heading {
 	visibility: hidden;
 	width: 0;
@@ -128,47 +175,64 @@ a {
 	transition: all 0.5s;
 }
 
-.poster > .imgBackdrop {
-	z-index: -1;
-	background: #000;
-}
-
 .posterBody {
 	position: absolute;
-	bottom: 0;
+	top: 0;
 	width: 100%;
 	display: flex;
 	flex-direction: column;
+	visibility: hidden;
+}
+
+.poster .posterBody {
+	background: rgba(0, 0, 0, 0.75);
+	height: 100%;
+	visibility: hidden;
+	opacity: 0;
+	transition: opacity 0.5s, visibility 0.5s;
 }
 
 .poster .posterTitle {
+	text-align: center;
 	color: #fff;
-	transition: all 2s;
+	padding: 80px 0 50px 0;
 }
 
-.poster:hover .posterTitle {
+.poster:hover .posterBody {
+	visibility: visible;
 	opacity: 1;
 }
 
-.poster:hover img {
-	opacity: 0.4;
+.posterButtons {
+	visibility: hidden;
+}
+
+.poster:hover .posterButtons {
+	visibility: visible;
+	opacity: 1;
 }
 
 .posterBody > .posterButtons {
 	display: flex;
-	align-content: stretch;
+	flex-direction: column;
 	justify-content: space-between;
 	width: 100%;
 }
 
 .posterBody > .posterButtons > button {
 	flex-grow: 1;
+	border: none;
+	height: 30px;
+	color: #fff;
+	background: none;
+	outline: none;
 }
 
 .carousel {
 	white-space: nowrap;
 	overflow-x: auto;
 	width: 100%;
+	height: 400px;
 }
 
 .carousel div {
