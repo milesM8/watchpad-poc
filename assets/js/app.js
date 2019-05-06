@@ -122,20 +122,23 @@ $(document).ready(function () {
             .addClass("posterTitle");
         const posterButtons = $("<div>").addClass("posterButtons");
         const collectionButton = $("<button>")
-            .addClass("addToCollection")
+            .addClass("listButton")
             .attr("data-name", media.title)
+            .attr("data-action", "toCollection")
             .attr("data-media-type", mediaType)
             .attr("data-id", media.id)
             .text(strings.COLLECTION);
         const watchListButton = $("<button>")
-            .addClass("addToWatchList")
+            .addClass("listButton")
             .attr("data-name", media.title)
+            .attr("data-action", "toWatchList")
             .attr("data-media-type", mediaType)
             .attr("data-id", media.id)
             .text(strings.WATCHLIST);
         const ignoreButton = $("<button>")
-            .addClass("addToIgnore")
+            .addClass("listButton")
             .attr("data-name", media.title)
+            .attr("data-action", "toIgnore")
             .attr("data-media-type", mediaType)
             .attr("data-id", media.id)
             .text(strings.IGNORE);
@@ -253,22 +256,13 @@ $(document).ready(function () {
 
     handlePageChange("dashboard");
 
-    $(document).on("click", ".addToWatchList", function () {
+    $(document).on("click", ".listButton", function () {
         const button = $(this);
-        localStorageAdd("toWatchList", { name: button.attr("data-name"), id: button.attr("data-id"), mediaType: button.attr("data-media-type"), date: new Date() });
-    });
-    $(document).on("click", ".addToCollection", function () {
-        const button = $(this);
-        localStorageAdd("toCollection", { name: button.attr("data-name"), id: button.attr("data-id"), mediaType: button.attr("data-media-type"), date: new Date() });
-    });
-    $(document).on("click", ".addToIgnore", function () {
-        const button = $(this);
-        localStorageAdd("toIgnore", { name: button.attr("data-name"), id: button.attr("data-id"), mediaType: button.attr("data-media-type"), date: new Date() });
+        console.log(button.attr("data-action"));
+        localStorageAdd(button.attr("data-action"), { name: button.attr("data-name"), id: button.attr("data-id"), mediaType: button.attr("data-media-type"), date: new Date() });
     });
 
-    $("#searchForm").submit(function (e) {
-        e.preventDefault();
-
+    $("#search").keypress(function (e) {
         const searchTerm = $("#search").val();
         handlePageChange("search", { query: searchTerm });
     });
