@@ -104,13 +104,31 @@ $(document).ready(function () {
                 type: "GET",
                 data: { ...requestData, ...parameters },
                 dataType: "json"
-            }), mediaType: mediaType
+            }),
+            mediaType: mediaType
         };
+    };
+
+    // TMDB API Query call
+    const utellyQuery = term => {
+        let queryURL = strings.UTELLY_URL;
+        const requestData = { term: term, country: "us" };
+
+        return $.ajax({
+            url: queryURL,
+            type: "GET",
+            headers: {
+                'X-RapidAPI-Host': strings.UTELLY_HOST,
+                'X-RapidAPI-Key': strings.UTELLY_KEY
+            },
+            data: requestData,
+            dataType: "json"
+        })
     };
 
     //renders a single poster
     const renderPoster = (media, mediaType) => {
-        const posterContainer = $("<div>").addClass("poster");
+        const posterContainer = $("<div>").addClass("poster").attr("data-name", media.title || media.name);
 
         const posterImageBackdrop = $("<div>").addClass("imgBackdrop");
         const posterImage = $("<img>").attr("src", `${strings.TMDB_IMAGE_URL}${media.poster_path}`);
@@ -123,21 +141,21 @@ $(document).ready(function () {
         const posterButtons = $("<div>").addClass("posterButtons");
         const collectionButton = $("<button>")
             .addClass("listButton")
-            .attr("data-name", media.title)
+            .attr("data-name", media.title || media.name)
             .attr("data-action", "toCollection")
             .attr("data-media-type", mediaType)
             .attr("data-id", media.id)
             .text(strings.COLLECTION);
         const watchListButton = $("<button>")
             .addClass("listButton")
-            .attr("data-name", media.title)
+            .attr("data-name", media.title || media.name)
             .attr("data-action", "toWatchList")
             .attr("data-media-type", mediaType)
             .attr("data-id", media.id)
             .text(strings.WATCHLIST);
         const ignoreButton = $("<button>")
             .addClass("listButton")
-            .attr("data-name", media.title)
+            .attr("data-name", media.title || media.name)
             .attr("data-action", "toIgnore")
             .attr("data-media-type", mediaType)
             .attr("data-id", media.id)
@@ -256,8 +274,17 @@ $(document).ready(function () {
 
     handlePageChange("dashboard");
 
+    $(document).on("click", ".poster", function(){
+        const call = utellyQuery($(this).attr("data-name"))
+        call.then(function (response) {
+            console.log(response.results[0].locations);
+        });
+    })
+
     $(document).on("click", ".listButton", function () {
         const button = $(this);
+        $(".listButton").removeClass("active")
+        button.addClass("active")
         localStorageAdd(button.attr("data-action"), { name: button.attr("data-name"), id: button.attr("data-id"), mediaType: button.attr("data-media-type"), date: new Date() });
     });
 
@@ -266,5 +293,5 @@ $(document).ready(function () {
         handlePageChange("search", { query: searchTerm });
     });
 
-$("#main-section").css("height", $(document).height());
+    $("#main-section").css("height", $(document).height());
 });
