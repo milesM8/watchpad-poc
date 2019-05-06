@@ -7,7 +7,8 @@ main,
 }
 
 body {
-	background-color: #1b1e2c;
+	background: rgb(57, 62, 88);
+	background: radial-gradient(circle, rgba(57, 62, 88, 1) 0%, rgba(27, 30, 44, 1) 100%);
 	font-family: "Open Sans", sans-serif;
 	color: #ccc;
 }
@@ -157,30 +158,27 @@ a {
 	transition: all 0.5s;
 }
 
-.poster > .imgBackdrop {
-	z-index: -1;
-	background: #000;
-}
-
 .posterBody {
 	position: absolute;
-	bottom: 0;
+	top: 0;
 	width: 100%;
 	display: flex;
 	flex-direction: column;
 }
 
 .poster .posterTitle {
+	background: rgba(0, 0, 0, 0.75);
+	padding: 140px 0;
+	text-align: center;
 	color: #fff;
-	transition: all 2s;
+	visibility: hidden;
+	opacity: 0;
+	transition: opacity 0.5s, visibility 0.5s;
 }
 
 .poster:hover .posterTitle {
+	visibility: visible;
 	opacity: 1;
-}
-
-.poster:hover img {
-	opacity: 0.4;
 }
 
 .posterBody > .posterButtons {
@@ -192,12 +190,16 @@ a {
 
 .posterBody > .posterButtons > button {
 	flex-grow: 1;
+	border: none;
+	height: 30px;
+	outline: none;
 }
 
 .carousel {
 	white-space: nowrap;
 	overflow-x: auto;
 	width: 100%;
+	height: 400px;
 }
 
 .carousel div {
