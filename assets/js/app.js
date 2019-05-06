@@ -258,7 +258,6 @@ $(document).ready(function () {
 
     $(document).on("click", ".listButton", function () {
         const button = $(this);
-        console.log(button.attr("data-action"));
         localStorageAdd(button.attr("data-action"), { name: button.attr("data-name"), id: button.attr("data-id"), mediaType: button.attr("data-media-type"), date: new Date() });
     });
 
@@ -266,4 +265,6 @@ $(document).ready(function () {
         const searchTerm = $("#search").val();
         handlePageChange("search", { query: searchTerm });
     });
+
+$("#main-section").css("height", $(document).height());
 });

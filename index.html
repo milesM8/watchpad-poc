@@ -9,7 +9,7 @@
 
 		<link rel="stylesheet" href="assets/css/reset.css" />
 		<link rel="stylesheet" href="assets/css/bootstrap-grid.min.css" />
-		<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
 		<link
 			rel="stylesheet"
 			href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
@@ -30,9 +30,9 @@
 					<input type="text" name="query" id="search" placeholder="Search for movie or tv show" />
 				</div>
 
-				<div class="col" id="dashboard-link">
-					<a href="#" class="viewLink" data-view="dashboard">Dashboard</a>
+				<div class="col" id="links">
 					<a href="#" class="viewLink" data-view="watchList">Watch List</a>
+					<a href="#" class="viewLink" id="dashboard-link" data-view="discoverMovie">Dashboard</a>
 				</div>
 			</div>
 		</header>
@@ -126,10 +126,12 @@
 							<label for="WesternCB">Western</label>
 						</div>
 					</div>
+					<!--
 					<label>year</label>
 					<div class="filter-year">
 						<input type="number" id="yearInput" />
 					</div>
+					-->
 				</form>
 			</div>
 
