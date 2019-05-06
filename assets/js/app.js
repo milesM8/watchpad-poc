@@ -268,6 +268,8 @@ $(document).ready(function () {
 
     $(document).on("click", ".viewLink", function () {
         const button = $(this);
+        $(".viewLink").removeClass("active")
+        button.addClass("active")
         const page = button.attr("data-page") ? button.attr("data-page") : 1;
         handlePageChange(button.attr("data-view"), { page: page });
     });
@@ -283,8 +285,6 @@ $(document).ready(function () {
 
     $(document).on("click", ".listButton", function () {
         const button = $(this);
-        $(".listButton").removeClass("active")
-        button.addClass("active")
         localStorageAdd(button.attr("data-action"), { name: button.attr("data-name"), id: button.attr("data-id"), mediaType: button.attr("data-media-type"), date: new Date() });
     });
 
