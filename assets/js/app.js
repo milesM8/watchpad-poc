@@ -247,4 +247,6 @@ $(document).ready(function() {
 		const searchTerm = $("#search").val();
 		handlePageChange("search", { query: searchTerm });
 	});
+
+	$("#main-section").css("height", $(document).height());
 });
