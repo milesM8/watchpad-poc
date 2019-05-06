@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function() {
 	// adds to the local storage list
 	const localStorageAdd = (type, data) => {
 		switch (type) {
@@ -137,7 +137,7 @@ $(document).ready(function () {
 	// takes a search query and adds the result to a given container
 	const search = (query, container, page = 1) => {
 		container.empty();
-		tmdbQuery("search", { query: query, page: page }).then(function (response) {
+		tmdbQuery("search", { query: query, page: page }).then(function(response) {
 			for (media of response.results) {
 				container.append(renderPoster(media));
 			}
@@ -147,7 +147,7 @@ $(document).ready(function () {
 	// renders the trending movies to a given container
 	const discover = (type, container, page = 1) => {
 		container.empty();
-		tmdbQuery(type, { page: page }).then(function (response) {
+		tmdbQuery(type, { page: page }).then(function(response) {
 			for (media of response.results) {
 				container.append(renderPoster(media));
 			}
@@ -158,89 +158,93 @@ $(document).ready(function () {
 	const watchList = (list, container) => {
 		container.empty();
 		for (movie of list) {
-			tmdbQuery("movie", { movie_id: movie.id }).then(function (response) {
+			tmdbQuery("movie", { movie_id: movie.id }).then(function(response) {
 				container.append(renderPoster(response));
 			});
 		}
 	};
 
 	const handlePageChange = (view, parameters = {}) => {
-		const carousel = $("<div>").addClass("carousel")
-		const content = $("#content")
-		content.empty()
-		const watchListCarousel = $("<div>").addClass("carousel").attr("id", "watchListCarousel")
-		const queueCarousel = $("<div>").addClass("carousel").attr("id", "queueCarousel")
+		const carousel = $("<div>").addClass("carousel");
+		const content = $("#content");
+		content.empty();
+		const watchListCarousel = $("<div>")
+			.addClass("carousel")
+			.attr("id", "watchListCarousel");
+		const queueCarousel = $("<div>")
+			.addClass("carousel")
+			.attr("id", "queueCarousel");
 
 		if (view === "dashboardEmpty") view = "discoverMovie";
-		if (!parameters.page) parameters.page = 1
+		if (!parameters.page) parameters.page = 1;
 
 		switch (view) {
 			case "discoverTV":
 			case "discoverMovie":
-				const discoverDiv = $("<div>")
-				discover(view, discoverDiv, parameters.page)
-				content.html(discoverDiv)
+				const discoverDiv = $("<div>");
+				discover(view, discoverDiv, parameters.page);
+				content.html(discoverDiv);
 				break;
 			case "search":
-				const searchDiv = $("<div>")
-				search(parameters.query, searchDiv, parameters.page)
-				content.html(searchDiv)
+				const searchDiv = $("<div>");
+				search(parameters.query, searchDiv, parameters.page);
+				content.html(searchDiv);
 				break;
 			case "dashboard":
 				break;
 			case "watchList":
-				storedWatchList = localStorageGet("watchList")
+				storedWatchList = localStorageGet("watchList");
 				if (storedWatchList !== []) {
-					watchList(storedWatchList, watchListCarousel)
-					content.append(watchListCarousel)
+					watchList(storedWatchList, watchListCarousel);
+					content.append(watchListCarousel);
 				}
 				break;
 			case "collection":
-				const collectionContainer = $("<div>").attr("id", "collectionContainer")
+				const collectionContainer = $("<div>").attr("id", "collectionContainer");
 				break;
 			case "queue":
 				break;
 		}
-	}
+	};
 
-	$("#toggleSidebar").click(function (e) {
-		const main = $("#main-section")
+	$("#toggleSidebar").click(function(e) {
+		const main = $("#main-section");
 		if (main.attr("data-state") === "open") {
-			main.attr("data-state", "closed")
-			main.removeClass("open")
-			main.addClass("closed")
+			main.attr("data-state", "closed");
+			main.removeClass("open");
+			main.addClass("closed");
 		} else {
-			main.attr("data-state", "open")
-			main.removeClass("closed")
-			main.addClass("open")
+			main.attr("data-state", "open");
+			main.removeClass("closed");
+			main.addClass("open");
 		}
-	})
+	});
 
-	$(document).on("click", ".viewLink", function () {
-		const button = $(this)
-		const page = (button.attr("data-page")) ? button.attr("data-page") : 1;
-		handlePageChange(button.attr("data-view"), { page: page })
-	})
+	$(document).on("click", ".viewLink", function() {
+		const button = $(this);
+		const page = button.attr("data-page") ? button.attr("data-page") : 1;
+		handlePageChange(button.attr("data-view"), { page: page });
+	});
 
 	handlePageChange("discoverMovie");
 
-	$(document).on("click", ".addToWatchList", function () {
+	$(document).on("click", ".addToWatchList", function() {
 		const button = $(this);
 		localStorageAdd("toWatchList", { name: button.attr("data-name"), id: button.attr("data-id"), date: new Date() });
 	});
-	$(document).on("click", ".addToCollection", function () {
+	$(document).on("click", ".addToCollection", function() {
 		const button = $(this);
 		localStorageAdd("toCollection", { name: button.attr("data-name"), id: button.attr("data-id"), date: new Date() });
 	});
-	$(document).on("click", ".addToIgnore", function () {
+	$(document).on("click", ".addToIgnore", function() {
 		const button = $(this);
 		localStorageAdd("toIgnore", { name: button.attr("data-name"), id: button.attr("data-id"), date: new Date() });
 	});
 
-	$("#searchForm").submit(function (e) {
+	$("#searchForm").submit(function(e) {
 		e.preventDefault();
 
 		const searchTerm = $("#search").val();
-		handlePageChange("search", { query: searchTerm })
+		handlePageChange("search", { query: searchTerm });
 	});
 });
