@@ -27,7 +27,9 @@
 				</div>
 
 				<div class="col" id="search-bar">
-					<input type="text" name="query" id="search" placeholder="Search for movie or tv show" />
+					<form action="" id="searchForm">
+						<input type="text" name="query" id="search" placeholder="Search for movie or tv show" />
+					</form>
 				</div>
 
 				<div class="col" id="links">
@@ -38,102 +40,7 @@
 		</header>
 
 		<main class="container-fluid closed" id="main-section" data-state="closed">
-			<div id="filters">
-				<div class="sideBarTitle">
-					<h3 class="heading">Filters</h3>
-					<div class="menuIcon" id="toggleSidebar">
-						<span>&lt;</span>
-					</div>
-				</div>
-				<form id="filtersForm">
-					<div class="sort">
-						<h4 id="sortby-filter">Sort By</h4>
-						<input type="checkbox" id="sortName" /><label>by name</label><input type="checkbox" id="sortDirection" /><br />
-						<input type="checkbox" id="sortReleaseDate" /><label>release date</label>
-						<input type="checkbox" id="sortDirection" /><br />
-						<input type="checkbox" id="sortPopularity" /><label>popularity</label>
-						<input type="checkbox" id="sortDirection" /><br />
-					</div>
-					<h4 id="type-filter">Type</h4>
-					<div class="movie-or-tv-box">
-						<input type="checkbox" name="movie-tv-checkbox" id="filterMovie" value="filter-movie" /> filter by movie<br />
-						<input type="checkbox" name="movie-tv-checkbox" id="filterTV" value="filter-tv" /> filter by television<br />
-					</div>
-					<h4 id="genre-filter">Genre</h4>
-					<div class="genre">
-						<div>
-							<input type="checkbox" value="28,12,10759" id="actionCB" />
-							<label for="actionCB">Action & Adventure</label>
-						</div>
-						<div>
-							<input type="checkbox" value="16" id="animationCB" />
-							<label for="AnimationCB">Animation</label>
-						</div>
-						<div>
-							<input type="checkbox" value="35" id="comedy" />
-							<label for="ComedyCB">Comedy</label>
-						</div>
-						<div>
-							<input type="checkbox" value="80" id="crimeCB" />
-							<label for="CrimeCB">Crime</label>
-						</div>
-						<div>
-							<input type="checkbox" value="99" id="documentaryCB" />
-							<label for="DocumentaryCB">Documentary</label>
-						</div>
-						<div>
-							<input type="checkbox" value="18" id="dramaCB" />
-							<label for="DramaCB">Drama</label>
-						</div>
-						<div>
-							<input type="checkbox" value="10751" id="familyCB" />
-							<label for="FamilyCB">Family</label>
-						</div>
-						<div>
-							<input type="checkbox" value="10762" id="kidsCB" />
-							<label for="KidsCB">Kids</label>
-						</div>
-						<div>
-							<input type="checkbox" value="9648" id="mysteryCB" />
-							<label for="MysteryCB">Mystery</label>
-						</div>
-						<div>
-							<input type="checkbox" value="878,14,10765" id="scififantasyCB" />
-							<label for="Sci-Fi & FantasyCB">Sci-Fi & Fantasy</label>
-						</div>
-						<div>
-							<input type="checkbox" value="10767" id="talkCB" />
-							<label for="TalkCB">Talk</label>
-						</div>
-						<div>
-							<input type="checkbox" value="10763" id="newsCB" />
-							<label for="NewsCB">News</label>
-						</div>
-						<div>
-							<input type="checkbox" value="10764" id="realityCB" />
-							<label for="RealityCB">Reality</label>
-						</div>
-						<div>
-							<input type="checkbox" value="10766" id="soapCB" />
-							<label for="SoapCB">Soap</label>
-						</div>
-						<div>
-							<input type="checkbox" value="10768,10752" id="warCB" />
-							<label for="War & PoliticsCB">War & Politics</label>
-						</div>
-						<div>
-							<input type="checkbox" value="37" id="westernCB" />
-							<label for="WesternCB">Western</label>
-						</div>
-					</div>
-					<!--
-					<label>year</label>
-					<div class="filter-year">
-						<input type="number" id="yearInput" />
-					</div>
-					-->
-				</form>
-			</div>
+			
 
 			<div id="content"></div>
 		</main>

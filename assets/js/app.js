@@ -288,10 +288,10 @@ $(document).ready(function () {
         localStorageAdd(button.attr("data-action"), { name: button.attr("data-name"), id: button.attr("data-id"), mediaType: button.attr("data-media-type"), date: new Date() });
     });
 
-    $("#search").keypress(function (e) {
+	$("#searchForm").submit(function (e) {
+		e.preventDefault();
+
         const searchTerm = $("#search").val();
         handlePageChange("search", { query: searchTerm });
     });
-
-    $("#main-section").css("height", $(document).height());
 });
