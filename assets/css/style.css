@@ -1,8 +1,5 @@
 html,
-body,
-main,
-.row,
-.col {
+body {
 	height: 100%;
 }
 
@@ -21,17 +18,25 @@ a {
 	background-color: #181826;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	height: 80px;
+	padding: 0 40px;
 	line-height: 80px;
 	position: fixed;
 	z-index: 999;
 }
 
+.row {
+	display: flex;
+	justify-content: space-between;
+}
+
+#nav .col {
+	padding: 0;
+}
+
 #title-logo {
-	text-align: left;
 	font-weight: 100;
 	font-size: 28px;
-	padding: 0 80px 0 40px;
-	max-width: 250px;
+	max-width: 180px;
 }
 
 #color-change {
@@ -39,39 +44,19 @@ a {
 	color: #2ebada;
 }
 
-h3 {
-	font-size: 16px;
-}
-
-h4 {
-	font-size: 14px;
-	text-transform: uppercase;
-	letter-spacing: 0.06em;
-	padding: 30px 0 5px 0;
-}
-
 #search-bar {
-	padding-left: 40px;
+	text-align: left;
 }
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-textarea:-webkit-autofill,
-textarea:-webkit-autofill:hover,
-textarea:-webkit-autofill:focus,
-select:-webkit-autofill,
-select:-webkit-autofill:hover,
-select:-webkit-autofill:focus,
 #search {
-	width: 400px;
-	padding: 30px 0 7px 0;
 	font-size: 16px;
 	color: #ccc;
 	border: none;
 	border-bottom: 1px solid #666;
 	background: none;
 	outline: none;
+	width: 75%;
+	padding-bottom: 7px;
 }
 
 #search-button {
@@ -90,9 +75,18 @@ select:-webkit-autofill:focus,
 	font-size: 14px;
 }
 
+.w-100 {
+	width: 100%;
+	display: none;
+}
+
 #links {
 	text-align: right;
-	padding: 0 55px;
+	width: 100%;
+}
+
+.viewLink {
+	margin-left: 20px;
 }
 
 #dashboard-link {
@@ -101,7 +95,10 @@ select:-webkit-autofill:focus,
 	padding: 15px 30px;
 	font-weight: 600;
 	border-radius: 30px;
-	margin-left: 20px;
+}
+
+#discover-link {
+	display: none;
 }
 
 .sideBarTitle {
@@ -139,14 +136,21 @@ select:-webkit-autofill:focus,
 #filters {
 	background: rgb(25, 25, 38);
 	background: linear-gradient(180deg, rgba(25, 25, 38, 1) 10%, rgba(47, 47, 63, 1) 100%);
-	height: 100% !important;
 	transition: all 0.5s;
 	padding: 100px 10px;
+}
+
+h4 {
+	font-size: 14px;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	padding: 30px 0 5px 0;
 }
 
 h3 {
 	padding-top: 15px;
 	padding-left: 10px;
+	font-size: 16px;
 }
 
 #filters form {
@@ -178,7 +182,8 @@ h3 {
 }
 
 #main-section.closed #content {
-	width: calc(100vw - 50px);
+	width: 100%;
+	text-align: left;
 }
 
 #main-section.closed .menuIcon {
@@ -275,4 +280,74 @@ h3 {
 
 .carousel div {
 	white-space: normal;
+}
+
+/* Mobile Responsive */
+
+@media only screen and (max-width: 768px) {
+	.w-100 {
+		display: unset;
+	}
+	#filters {
+		display: none;
+	}
+	#main-section.closed #content {
+		width: 100%;
+		text-align: center;
+		padding: 0;
+		margin-top: 140px;
+	}
+	#nav {
+		height: 120px;
+		line-height: 60px;
+	}
+	#search-bar {
+		text-align: right;
+	}
+	#search {
+		width: 80%;
+	}
+	#title-logo {
+		max-width: 140px;
+	}
+	#links {
+		text-align: center;
+	}
+	.viewLink {
+		margin-left: 0;
+	}
+	#watchlist-link {
+		margin: 0 60px;
+	}
+	#discover-link {
+		display: unset;
+	}
+	#dashboard-link {
+		background: none;
+		color: #ccc;
+		padding: 0;
+		font-weight: 400;
+	}
+}
+
+@media only screen and (max-width: 660px) {
+	.poster,
+	.imgBackdrop img {
+		width: 160px;
+		height: 240px;
+	}
+	.poster .posterTitle {
+		padding: 20px 10px 30px 10px;
+	}
+}
+
+@media only screen and (max-width: 540px) {
+	.poster {
+		margin: 20px;
+	}
+	.poster,
+	.imgBackdrop img {
+		width: 380px;
+		height: 570px;
+	}
 }
