@@ -9,7 +9,7 @@
 
 		<link rel="stylesheet" href="assets/css/reset.css" />
 		<link rel="stylesheet" href="assets/css/bootstrap-grid.min.css" />
-		<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
 		<link
 			rel="stylesheet"
 			href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
@@ -23,7 +23,7 @@
 		<header class="container-fluid" id="nav">
 			<div class="row">
 				<div class="col" id="title-logo">
-					<a href="index.html">watch<span id="color-change">Pad</span></a>
+					<a href="#" data-view="discoverMovie">watch<span id="color-change">Pad</span></a>
 				</div>
 				<div>
 					<!-- <form id="filterForm">
@@ -34,16 +34,16 @@
 				<div class="col" id="search-bar">
 					<form action="#" id="searchForm">
 							<input type="radio" id="TVCB" name="movieTV" />
-							<input type="radio" id="movieCB" name="movieTV" />
-							<label for="TVCB" class="movieTVToggle" id="TVLabel" name="movieTV">TV</label>
+							<input type="radio" id="movieCB" name="movieTV" [checked]="true" />
+							<label for="TVCB" class="movieTVToggle" id="TVLabel" name="movieTV" [checked]="true">TV</label>
 							/<label for="movieCB" class="movieTVToggle" id="movieLabel" name="movieTV"> Movie</label>
 						<input type="text" name="query" id="search" placeholder="Search for movie or tv show" />
-						<button id="search-button" type="submit"><i class="fas fa-search"></i></button>
 					</form>
 				</div>
-				<div class="col" id="dashboard-link">
-					<a href="#" class="viewLink" data-view="discoverMovie">Dashboard</a>
+
+				<div class="col" id="links">
 					<a href="#" class="viewLink" data-view="watchList">Watch List</a>
+					<a href="#" class="viewLink" id="dashboard-link" data-view="dashboard">Dashboard</a>
 				</div>
 			</div>
 		</header>

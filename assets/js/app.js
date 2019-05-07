@@ -60,47 +60,77 @@ $(document).ready(function() {
 	const tmdbQuery = (type, parameters = {}) => {
 		let queryURL = strings.TMDB_URL;
 		const requestData = { api_key: strings.TMDB_KEY };
+		let mediaType;
+
+		parameters.region = "US";
 
 		switch (type) {
 			case "discoverMovie":
+				mediaType = "movie";
 				queryURL += "/discover/movie";
 				break;
 			case "discoverTV":
+				mediaType = "tv";
 				queryURL += "/discover/tv";
 				break;
 			case "movie":
-				queryURL += `search/movie/${parameters.movie_id}`;
+				mediaType = "movie";
+				queryURL += `/movie/${parameters.media_id}`;
 				break;
 			case "tv":
-				queryURL += `search/tv/${parameters.tv_id}`;
+				mediaType = "tv";
+				queryURL += `/tv/${parameters.media_id}`;
 				break;
 			case "tvSeason":
-				queryURL += `/tv/${parameters.tv_id}/season/${parameters.season_number}`;
+				queryURL += `/tv/${parameters.media_id}/season/${parameters.season_number}`;
 				break;
 			case "tvEpisode":
-				queryURL += `/tv/${parameters.tv_id}/season/${parameters.season_number}/episode/${parameters.episode_number}`;
+				queryURL += `/tv/${parameters.media_id}/season/${parameters.season_number}/episode/${parameters.episode_number}`;
 				break;
 			case "company":
 				queryURL += `/search/company`;
 				break;
 			case "search":
+				mediaType = "multi";
 				queryURL += `/search/multi`;
 				break;
 			default:
 				return;
 		}
 
-		return (query = $.ajax({
+		return {
+			request: $.ajax({
+				url: queryURL,
+				type: "GET",
+				data: { ...requestData, ...parameters },
+				dataType: "json"
+			}),
+			mediaType: mediaType
+		};
+	};
+
+	// TMDB API Query call
+	const utellyQuery = term => {
+		let queryURL = strings.UTELLY_URL;
+		const requestData = { term: term, country: "us" };
+
+		return $.ajax({
 			url: queryURL,
 			type: "GET",
-			data: { ...requestData, ...parameters },
+			headers: {
+				"X-RapidAPI-Host": strings.UTELLY_HOST,
+				"X-RapidAPI-Key": strings.UTELLY_KEY
+			},
+			data: requestData,
 			dataType: "json"
-		}));
+		});
 	};
 
 	//renders a single poster
-	const renderPoster = media => {
-		const posterContainer = $("<div>").addClass("poster");
+	const renderPoster = (media, mediaType) => {
+		const posterContainer = $("<div>")
+			.addClass("poster")
+			.attr("data-name", media.title || media.name);
 
 		const posterImageBackdrop = $("<div>").addClass("imgBackdrop");
 		const posterImage = $("<img>").attr("src", `${strings.TMDB_IMAGE_URL}${media.poster_path}`);
@@ -112,18 +142,24 @@ $(document).ready(function() {
 			.addClass("posterTitle");
 		const posterButtons = $("<div>").addClass("posterButtons");
 		const collectionButton = $("<button>")
-			.addClass("addToCollection")
-			.attr("data-name", media.title)
+			.addClass("listButton")
+			.attr("data-name", media.title || media.name)
+			.attr("data-action", "toCollection")
+			.attr("data-media-type", mediaType)
 			.attr("data-id", media.id)
 			.text(strings.COLLECTION);
 		const watchListButton = $("<button>")
-			.addClass("addToWatchList")
-			.attr("data-name", media.title)
+			.addClass("listButton")
+			.attr("data-name", media.title || media.name)
+			.attr("data-action", "toWatchList")
+			.attr("data-media-type", mediaType)
 			.attr("data-id", media.id)
 			.text(strings.WATCHLIST);
 		const ignoreButton = $("<button>")
-			.addClass("addToIgnore")
-			.attr("data-name", media.title)
+			.addClass("listButton")
+			.attr("data-name", media.title || media.name)
+			.attr("data-action", "toIgnore")
+			.attr("data-media-type", mediaType)
 			.attr("data-id", media.id)
 			.text(strings.IGNORE);
 
@@ -137,9 +173,12 @@ $(document).ready(function() {
 	// takes a search query and adds the result to a given container
 	const search = (query, container, page = 1) => {
 		container.empty();
-		tmdbQuery("search", { query: query, page: page }).then(function(response) {
+		const call = tmdbQuery("search", { query: query, page: page });
+		call.request.then(function(response) {
+			console.log(response);
 			for (media of response.results) {
-				container.append(renderPoster(media));
+				let mediaType = call.mediaType === "multi" ? media.media_type : call.mediaType;
+				container.append(renderPoster(media, mediaType));
 			}
 		});
 	};
@@ -147,9 +186,11 @@ $(document).ready(function() {
 	// renders the trending movies to a given container
 	const discover = (type, container, page = 1) => {
 		container.empty();
-		tmdbQuery(type, { page: page }).then(function(response) {
+		const call = tmdbQuery(type, { page: page });
+		call.request.then(function(response) {
 			for (media of response.results) {
-				container.append(renderPoster(media));
+				let mediaType = call.mediaType === "multi" ? media.media_type : call.mediaType;
+				container.append(renderPoster(media, mediaType));
 			}
 		});
 	};
@@ -157,23 +198,21 @@ $(document).ready(function() {
 	// renders the watch list to a given container
 	const watchList = (list, container) => {
 		container.empty();
-		for (movie of list) {
-			tmdbQuery("movie", { movie_id: movie.id }).then(function(response) {
-				container.append(renderPoster(response));
+		for (media of list) {
+			const call = tmdbQuery(media.mediaType, { media_id: media.id });
+			call.request.then(function(response) {
+				container.append(renderPoster(response, call.mediaType));
 			});
 		}
 	};
 
 	const handlePageChange = (view, parameters = {}) => {
 		const carousel = $("<div>").addClass("carousel");
+		const section = heading => {
+			return $("<div>").append($("<h2>").text(heading));
+		};
 		const content = $("#content");
 		content.empty();
-		const watchListCarousel = $("<div>")
-			.addClass("carousel")
-			.attr("id", "watchListCarousel");
-		const queueCarousel = $("<div>")
-			.addClass("carousel")
-			.attr("id", "queueCarousel");
 
 		if (view === "dashboardEmpty") view = "discoverMovie";
 		if (!parameters.page) parameters.page = 1;
@@ -183,20 +222,30 @@ $(document).ready(function() {
 			case "discoverMovie":
 				const discoverDiv = $("<div>");
 				discover(view, discoverDiv, parameters.page);
-				content.html(discoverDiv);
+				content.html(section("Discover Movies").append(discoverDiv));
 				break;
 			case "search":
 				const searchDiv = $("<div>");
 				search(parameters.query, searchDiv, parameters.page);
-				content.html(searchDiv);
+				content.html(section("Search Results").append(searchDiv));
 				break;
 			case "dashboard":
-				break;
-			case "watchList":
+				const watchListCarousel = carousel;
 				storedWatchList = localStorageGet("watchList");
 				if (storedWatchList !== []) {
 					watchList(storedWatchList, watchListCarousel);
-					content.append(watchListCarousel);
+					content.append(section("Watch List").append(watchListCarousel));
+				}
+				const dashboardDiv = $("<div>");
+				discover("discoverMovie", dashboardDiv, parameters.page);
+				content.append(section("Discover Movies").append(dashboardDiv));
+				break;
+			case "watchList":
+				storedWatchList = localStorageGet("watchList");
+				const watchListDiv = $("<div>");
+				if (storedWatchList !== []) {
+					watchList(storedWatchList, watchListDiv);
+					content.append(section("Watch List").append(watchListDiv));
 				}
 				break;
 			case "collection":
@@ -207,59 +256,74 @@ $(document).ready(function() {
 		}
 	};
 
-	let tvState=false;
-	$("#TVLabel").on("click", function() {
-		tvState = true;
-		console.log( $("#TVCB"));
+	$("#toggleSidebar").click(function(e) {
+		const main = $("#main-section");
+		if (main.attr("data-state") === "open") {
+			main.attr("data-state", "closed");
+			main.removeClass("open");
+			main.addClass("closed");
+		} else {
+			main.attr("data-state", "open");
+			main.removeClass("closed");
+			main.addClass("open");
+		}
 	});
 
-	$("#movieLabel").on("click", function() {
-		console.log( $("#movieCB"));
-	});
 	$(document).on("click", ".viewLink", function() {
 		const button = $(this);
+		$(".viewLink").removeClass("active");
+		button.addClass("active");
 		const page = button.attr("data-page") ? button.attr("data-page") : 1;
 		handlePageChange(button.attr("data-view"), { page: page });
 	});
 
-	handlePageChange("discoverMovie");
+	handlePageChange("dashboard");
 
-	$(document).on("click", ".addToWatchList", function() {
-		const button = $(this);
-		localStorageAdd("toWatchList", { name: button.attr("data-name"), id: button.attr("data-id"), date: new Date() });
+	$(document).on("click", ".poster", function() {
+		const call = utellyQuery($(this).attr("data-name"));
+		call.then(function(response) {
+			console.log(response.results[0].locations);
+		});
 	});
-	$(document).on("click", ".addToCollection", function() {
+
+	$(document).on("click", ".listButton", function() {
 		const button = $(this);
-		localStorageAdd("toCollection", { name: button.attr("data-name"), id: button.attr("data-id"), date: new Date() });
+		localStorageAdd(button.attr("data-action"), {
+			name: button.attr("data-name"),
+			id: button.attr("data-id"),
+			mediaType: button.attr("data-media-type"),
+			date: new Date()
+		});
 	});
-	$(document).on("click", ".addToIgnore", function() {
-		const button = $(this);
-		localStorageAdd("toIgnore", { name: button.attr("data-name"), id: button.attr("data-id"), date: new Date() });
+
+	let tvState = false;
+	let movieState = false;
+	$("#TVLabel").on("click", function() {
+		tvState = true;
+		movieState = false;
+		console.log("tvstate " + tvState);
+	});
+
+	$("#movieLabel").on("click", function() {
+		tvState = false;
+		movieState = true;
+		console.log("movieState " + movieState);
 	});
 
 	$("#searchForm").submit(function(e) {
 		e.preventDefault();
-		
+
 		const searchTerm = $("#search").val();
+		console.log("tv " + tvState);
+		console.log("movie " + movieState);
 
-		const tvFilter = $("#TVCB").val();
-		const movieFilter = $("#movieCB").val();
-		console.log("tv " + tvFilter);
-		console.log("movie " + movieFilter);
-
-		if (tvFilter) {
-			console.log("tvfilter")
+		if (tvState) {
+			console.log(searchTerm);
 			handlePageChange("movie", { query: searchTerm });
-		}
-		if (movieFilter) {
+		} else if (movieState) {
 			handlePageChange("tv", { query: searchTerm });
-		} 
-		else {
+		} else {
 			handlePageChange("search", { query: searchTerm });
 		}
 	});
-
-	// $("#filterForm").submit(function(e) {
-	// 	e.preventDefault();
-	// });
 });
