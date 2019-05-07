@@ -62,7 +62,7 @@ $(document).ready(function () {
         const requestData = { api_key: strings.TMDB_KEY };
         let mediaType;
 
-        parameters.region = "US"
+        parameters.region = "US";
 
         switch (type) {
             case "discoverMovie":
@@ -118,17 +118,19 @@ $(document).ready(function () {
             url: queryURL,
             type: "GET",
             headers: {
-                'X-RapidAPI-Host': strings.UTELLY_HOST,
-                'X-RapidAPI-Key': strings.UTELLY_KEY
+                "X-RapidAPI-Host": strings.UTELLY_HOST,
+                "X-RapidAPI-Key": strings.UTELLY_KEY
             },
             data: requestData,
             dataType: "json"
-        })
+        });
     };
 
     //renders a single poster
     const renderPoster = (media, mediaType) => {
-        const posterContainer = $("<div>").addClass("poster").attr("data-name", media.title || media.name);
+        const posterContainer = $("<div>")
+            .addClass("poster")
+            .attr("data-name", media.title || media.name);
 
         const posterImageBackdrop = $("<div>").addClass("imgBackdrop");
         const posterImage = $("<img>").attr("src", `${strings.TMDB_IMAGE_URL}${media.poster_path}`);
@@ -171,10 +173,10 @@ $(document).ready(function () {
     // takes a search query and adds the result to a given container
     const search = (query, container, page = 1) => {
         container.empty();
-        const call = tmdbQuery("search", { query: query, page: page })
+        const call = tmdbQuery("search", { query: query, page: page });
         call.request.then(function (response) {
             for (media of response.results) {
-                let mediaType = (call.mediaType === "multi") ? media.media_type : call.mediaType
+                let mediaType = call.mediaType === "multi" ? media.media_type : call.mediaType;
                 container.append(renderPoster(media, mediaType));
             }
         });
@@ -183,10 +185,10 @@ $(document).ready(function () {
     // renders the trending movies to a given container
     const discover = (type, container, page = 1) => {
         container.empty();
-        const call = tmdbQuery(type, { page: page })
+        const call = tmdbQuery(type, { page: page });
         call.request.then(function (response) {
             for (media of response.results) {
-                let mediaType = (call.mediaType === "multi") ? media.media_type : call.mediaType
+                let mediaType = call.mediaType === "multi" ? media.media_type : call.mediaType;
                 container.append(renderPoster(media, mediaType));
             }
         });
@@ -196,7 +198,7 @@ $(document).ready(function () {
     const watchList = (list, container) => {
         container.empty();
         for (media of list) {
-            const call = tmdbQuery(media.mediaType, { media_id: media.id })
+            const call = tmdbQuery(media.mediaType, { media_id: media.id });
             call.request.then(function (response) {
                 container.append(renderPoster(response, call.mediaType));
             });
@@ -204,12 +206,12 @@ $(document).ready(function () {
     };
 
     const handlePageChange = (view, parameters = {}) => {
-        const carousel = $("<div>").addClass("carousel")
+        const carousel = $("<div>").addClass("carousel");
         const section = heading => {
-            return $("<div>").append($("<h2>").text(heading))
-        }
-        const content = $("#content")
-        content.empty()
+            return $("<div>").append($("<h2>").text(heading));
+        };
+        const content = $("#content");
+        content.empty();
 
         if (view === "dashboardEmpty") view = "discoverMovie";
         if (!parameters.page) parameters.page = 1;
@@ -227,8 +229,8 @@ $(document).ready(function () {
                 content.html(section("Search Results").append(searchDiv));
                 break;
             case "dashboard":
-                const watchListCarousel = carousel
-                storedWatchList = localStorageGet("watchList")
+                const watchListCarousel = carousel;
+                storedWatchList = localStorageGet("watchList");
                 if (storedWatchList !== []) {
                     watchList(storedWatchList, watchListCarousel);
                     content.append(section("Watch List").append(watchListCarousel));
@@ -238,7 +240,7 @@ $(document).ready(function () {
                 content.append(section("Discover Movies").append(dashboardDiv));
                 break;
             case "watchList":
-                storedWatchList = localStorageGet("watchList")
+                storedWatchList = localStorageGet("watchList");
                 const watchListDiv = $("<div>");
                 if (storedWatchList !== []) {
                     watchList(storedWatchList, watchListDiv);
@@ -268,30 +270,44 @@ $(document).ready(function () {
 
     $(document).on("click", ".viewLink", function () {
         const button = $(this);
-        $(".viewLink").removeClass("active")
-        button.addClass("active")
+        $(".viewLink").removeClass("active");
+        button.addClass("active");
         const page = button.attr("data-page") ? button.attr("data-page") : 1;
         handlePageChange(button.attr("data-view"), { page: page });
     });
 
     handlePageChange("dashboard");
 
-    $(document).on("click", ".poster", function(){
-        const call = utellyQuery($(this).attr("data-name"))
+    $(document).on("click", ".poster", function () {
+        const call = utellyQuery($(this).attr("data-name"));
         call.then(function (response) {
             console.log(response.results[0].locations);
         });
-    })
+    });
 
     $(document).on("click", ".listButton", function () {
         const button = $(this);
-        localStorageAdd(button.attr("data-action"), { name: button.attr("data-name"), id: button.attr("data-id"), mediaType: button.attr("data-media-type"), date: new Date() });
+        localStorageAdd(button.attr("data-action"), {
+            name: button.attr("data-name"),
+            id: button.attr("data-id"),
+            mediaType: button.attr("data-media-type"),
+            date: new Date()
+        });
     });
 
-	$("#searchForm").submit(function (e) {
-		e.preventDefault();
+    $("#searchForm").submit(function (e) {
+        e.preventDefault();
 
         const searchTerm = $("#search").val();
         handlePageChange("search", { query: searchTerm });
     });
+
+    Swappable = Swappable.default;
+    const swappable = new Swappable(document.getElementById("content"), {
+        draggable: ".poster"
+    });
+
+    swappable.on("swappable:start", () => console.log("swappable:start"));
+    swappable.on("swappable:swapped", () => console.log("swappable:swapped"));
+    swappable.on("swappable:stop", () => console.log("swappable:stop"));
 });
