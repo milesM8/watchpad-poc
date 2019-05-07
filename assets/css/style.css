@@ -21,15 +21,14 @@ input[type="checkbox"] {
 	display: none;
 }
 
-input[type="checkbox"]:checked + #TVLabel {
+input#TVCB[type="checkbox"]:checked ~ #TVLabel {
 	/* display: none; */
 	color: #b70707;
 }
 
-input[type="checkbox"]:checked + #movieLabel {
+input#movieCB[type="checkbox"]:checked ~ #movieLabel {
 	/* display: none; */
 	color: #b70707;
-
 }
 
 #nav {
