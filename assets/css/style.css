@@ -19,6 +19,7 @@ a {
 
 #nav {
 	background-color: #181826;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	height: 80px;
 	line-height: 80px;
 	position: fixed;
@@ -29,7 +30,7 @@ a {
 	text-align: left;
 	font-weight: 100;
 	font-size: 28px;
-	padding: 0 60px;
+	padding: 0 80px 0 40px;
 	max-width: 250px;
 }
 
@@ -46,12 +47,22 @@ h4 {
 	font-size: 14px;
 	text-transform: uppercase;
 	letter-spacing: 0.06em;
+	padding: 30px 0 5px 0;
 }
 
 #search-bar {
 	padding-left: 40px;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus,
 #search {
 	width: 400px;
 	padding: 30px 0 7px 0;
@@ -79,35 +90,18 @@ h4 {
 	font-size: 14px;
 }
 
-#dashboard-link {
+#links {
 	text-align: right;
 	padding: 0 55px;
 }
 
-.sideBarTitle {
-	text-align: center;
+#dashboard-link {
+	background: #28b0ce;
+	color: #fff;
+	padding: 15px 30px;
 	font-weight: 600;
-	font-size: 30px;
-	padding: 5px;
-	box-sizing: border-box;
-	transition: all 0.5s;
-	display: flex;
-	justify-content: space-between;
-}
-
-.menuIcon {
-	text-align: center;
-	display: inline-block;
-	box-sizing: border-box;
-	width: 50px;
-	font-size: 35px;
-	cursor: pointer;
-	transition: all 0.5s;
-	user-select: none;
-}
-
-.menuIcon:hover {
-	color: #b70707;
+	border-radius: 30px;
+	margin-left: 20px;
 }
 
 #main-section {
@@ -116,54 +110,17 @@ h4 {
 	display: flex;
 }
 
-#filters {
-	background: rgb(25, 25, 38);
-	background: linear-gradient(180deg, rgba(25, 25, 38, 1) 10%, rgba(47, 47, 63, 1) 100%);
-	height: 100% !important;
-	transition: all 0.5s;
-	padding-top: 85px;
-}
 
-#filtersForm {
-	margin: 20px;
+h3 {
+	padding-top: 15px;
+	padding-left: 10px;
 }
 
 #content {
 	margin-top: 100px;
-	transition: all 0.5s;
 	padding: 0 30px;
+	width: 100%;
 }
-
-#main-section.open #filters {
-	width: 250px;
-}
-
-#main-section.open #content {
-	width: calc(100vw - 250px);
-}
-
-#main-section.closed #filters {
-	width: 50px;
-}
-
-#main-section.closed #filters form {
-	visibility: hidden;
-	width: 0;
-}
-
-#main-section.closed #content {
-	width: calc(100vw - 50px);
-}
-
-#main-section.closed .menuIcon {
-	transform: rotate(180deg);
-}
-
-#main-section.closed .sideBarTitle .heading {
-	visibility: hidden;
-	width: 0;
-}
-
 .poster {
 	position: relative;
 	display: inline-block;
@@ -195,7 +152,9 @@ h4 {
 .poster .posterTitle {
 	text-align: center;
 	color: #fff;
-	padding: 80px 0 50px 0;
+	padding: 50px 10px 60px 10px;
+	font-weight: 900;
+	font-size: 18px;
 }
 
 .poster:hover .posterBody {
@@ -203,19 +162,9 @@ h4 {
 	opacity: 1;
 }
 
-.posterButtons {
-	visibility: hidden;
-}
-
-.poster:hover .posterButtons {
-	visibility: visible;
-	opacity: 1;
-}
-
 .posterBody > .posterButtons {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
 	width: 100%;
 }
 
@@ -226,13 +175,25 @@ h4 {
 	color: #fff;
 	background: none;
 	outline: none;
+	font-size: 12px;
+	text-transform: uppercase;
+	margin: 5px 0;
+}
+
+.posterBody > .posterButtons > button:hover {
+	color: #2ebada;
+}
+
+.posterBody > .posterButtons > button:active {
+	color: #444;
 }
 
 .carousel {
 	white-space: nowrap;
 	overflow-x: auto;
+	box-sizing: border-box;
 	width: 100%;
-	height: 400px;
+	margin: 10px 0;
 }
 
 .carousel div {
