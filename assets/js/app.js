@@ -147,6 +147,7 @@ $(document).ready(function() {
 	// renders the trending movies to a given container
 	const discover = (type, container, page = 1) => {
 		container.empty();
+		container.append("<h3>Trending</h3>");
 		tmdbQuery(type, { page: page }).then(function(response) {
 			for (media of response.results) {
 				container.append(renderPoster(media));
@@ -157,6 +158,7 @@ $(document).ready(function() {
 	// renders the watch list to a given container
 	const watchList = (list, container) => {
 		container.empty();
+		container.append("<h3>Watch List</h3>");
 		for (movie of list) {
 			tmdbQuery("movie", { movie_id: movie.id }).then(function(response) {
 				container.append(renderPoster(response));
