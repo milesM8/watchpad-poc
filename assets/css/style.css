@@ -17,16 +17,16 @@ a {
 	color: #ccc;
 }
 
-input[type="checkbox"] {
+input[type="radio"] {
 	display: none;
 }
 
-input#TVCB[type="checkbox"]:checked ~ #TVLabel {
+input#TVCB[type="radio"]:checked ~ #TVLabel {
 	/* display: none; */
 	color: #b70707;
 }
 
-input#movieCB[type="checkbox"]:checked ~ #movieLabel {
+input#movieCB[type="radio"]:checked ~ #movieLabel {
 	/* display: none; */
 	color: #b70707;
 }

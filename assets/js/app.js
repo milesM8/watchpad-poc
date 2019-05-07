@@ -69,10 +69,10 @@ $(document).ready(function() {
 				queryURL += "/discover/tv";
 				break;
 			case "movie":
-				queryURL += `/movie/${parameters.movie_id}`;
+				queryURL += `search/movie/${parameters.movie_id}`;
 				break;
 			case "tv":
-				queryURL += `/tv/${parameters.tv_id}`;
+				queryURL += `search/tv/${parameters.tv_id}`;
 				break;
 			case "tvSeason":
 				queryURL += `/tv/${parameters.tv_id}/season/${parameters.season_number}`;
@@ -207,12 +207,14 @@ $(document).ready(function() {
 		}
 	};
 
-	$("#TVLabel").on("click",function(){
-		console.log("tv label")
-	})
+	let tvState=false;
+	$("#TVLabel").on("click", function() {
+		tvState = true;
+		console.log( $("#TVCB"));
+	});
 
 	$("#movieLabel").on("click", function() {
-		console.log("movie label");
+		console.log( $("#movieCB"));
 	});
 	$(document).on("click", ".viewLink", function() {
 		const button = $(this);
@@ -237,8 +239,27 @@ $(document).ready(function() {
 
 	$("#searchForm").submit(function(e) {
 		e.preventDefault();
-
+		
 		const searchTerm = $("#search").val();
-		handlePageChange("search", { query: searchTerm });
+
+		const tvFilter = $("#TVCB").val();
+		const movieFilter = $("#movieCB").val();
+		console.log("tv " + tvFilter);
+		console.log("movie " + movieFilter);
+
+		if (tvFilter) {
+			console.log("tvfilter")
+			handlePageChange("movie", { query: searchTerm });
+		}
+		if (movieFilter) {
+			handlePageChange("tv", { query: searchTerm });
+		} 
+		else {
+			handlePageChange("search", { query: searchTerm });
+		}
 	});
+
+	// $("#filterForm").submit(function(e) {
+	// 	e.preventDefault();
+	// });
 });

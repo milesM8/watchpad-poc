@@ -26,24 +26,21 @@
 					<a href="index.html">watch<span id="color-change">Pad</span></a>
 				</div>
 				<div>
-					<form>
-						<label for="movieTV">
-							<!-- <input type="radio" name="movieTV" /> -->
-							<input type="checkbox" id="movieCB" />
-							<input type="checkbox" id="TVCB" />
-							<label for="TVCB" class="movieTVToggle" id="TVLabel" name="movieTV">TV</label>
-							/<label for="movieCB" class="movieTVToggle" id="movieLabel" name="movieTV"> Movie</label>
-						</label>
-					</form>
+					<!-- <form id="filterForm">
+
+					</form> -->
 				</div>
 
 				<div class="col" id="search-bar">
 					<form action="#" id="searchForm">
+							<input type="radio" id="TVCB" name="movieTV" />
+							<input type="radio" id="movieCB" name="movieTV" />
+							<label for="TVCB" class="movieTVToggle" id="TVLabel" name="movieTV">TV</label>
+							/<label for="movieCB" class="movieTVToggle" id="movieLabel" name="movieTV"> Movie</label>
 						<input type="text" name="query" id="search" placeholder="Search for movie or tv show" />
 						<button id="search-button" type="submit"><i class="fas fa-search"></i></button>
 					</form>
 				</div>
-
 				<div class="col" id="dashboard-link">
 					<a href="#" class="viewLink" data-view="discoverMovie">Dashboard</a>
 					<a href="#" class="viewLink" data-view="watchList">Watch List</a>
