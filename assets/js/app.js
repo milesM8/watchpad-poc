@@ -207,6 +207,13 @@ $(document).ready(function() {
 		}
 	};
 
+	$("#TVLabel").on("click",function(){
+		console.log("tv label")
+	})
+
+	$("#movieLabel").on("click", function() {
+		console.log("movie label");
+	});
 	$(document).on("click", ".viewLink", function() {
 		const button = $(this);
 		const page = button.attr("data-page") ? button.attr("data-page") : 1;
