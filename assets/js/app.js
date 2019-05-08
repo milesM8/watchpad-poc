@@ -1,6 +1,24 @@
 $(document).ready(function () {
-    // adds to the local storage list
-    const localStorageAdd = (type, data) => {
+
+    const watchListReorder = (id, newIndex) => {
+        const currentWatchList = localStorage.getItem("watchList") ? JSON.parse(localStorage.getItem("watchList")) : [];
+
+        currentWatchList.map((val, key) => {
+            if (val.id === id) {
+                const oldVal = currentWatchList[newIndex]
+                const newVal = val
+
+                currentWatchList[newIndex] = newVal
+                currentWatchList[key] = oldVal
+                
+                localStorage.setItem("watchList", JSON.stringify(currentWatchList));
+            }
+        })
+
+    }
+
+    // adds or removes to the local storage list
+    const localStorageToggle = (type, data) => {
         switch (type) {
             case "toCollection":
                 const currentCollection = localStorage.getItem("collection") ? JSON.parse(localStorage.getItem("collection")) : [];
@@ -130,6 +148,7 @@ $(document).ready(function () {
     const renderPoster = (media, mediaType) => {
         const posterContainer = $("<div>")
             .addClass("poster")
+            .attr("data-id", media.id)
             .attr("data-name", media.title || media.name);
 
         const posterImageBackdrop = $("<div>").addClass("imgBackdrop");
@@ -205,6 +224,16 @@ $(document).ready(function () {
         }
     };
 
+    const sortableListener = selector => {
+        new Sortable(document.querySelector(selector), {
+            animation: 150,
+            ghostClass: 'blue-background-class',
+            onEnd: function (e) {
+                watchListReorder($(e.item).attr("data-id"), e.newIndex)
+            }
+        });
+    }
+
     const handlePageChange = (view, parameters = {}) => {
         const carousel = $("<div>").addClass("carousel");
         const section = heading => {
@@ -233,7 +262,8 @@ $(document).ready(function () {
                 storedWatchList = localStorageGet("watchList");
                 if (storedWatchList !== []) {
                     watchList(storedWatchList, watchListCarousel);
-                    content.append(section("Watch List").append(watchListCarousel));
+                    content.append(section("Watch List").append(watchListCarousel.addClass("watchListContainer")));
+                    sortableListener(".watchListContainer")
                 }
                 const dashboardDiv = $("<div>");
                 discover("discoverMovie", dashboardDiv, parameters.page);
@@ -241,10 +271,11 @@ $(document).ready(function () {
                 break;
             case "watchList":
                 storedWatchList = localStorageGet("watchList");
-                const watchListDiv = $("<div>");
+                const watchListDiv = $("<div>").addClass("watchListContainer");
                 if (storedWatchList !== []) {
                     watchList(storedWatchList, watchListDiv);
                     content.append(section("Watch List").append(watchListDiv));
+                    sortableListener(".watchListContainer")
                 }
                 break;
             case "collection":
@@ -287,7 +318,7 @@ $(document).ready(function () {
 
     $(document).on("click", ".listButton", function () {
         const button = $(this);
-        localStorageAdd(button.attr("data-action"), {
+        localStorageToggle(button.attr("data-action"), {
             name: button.attr("data-name"),
             id: button.attr("data-id"),
             mediaType: button.attr("data-media-type"),
@@ -302,12 +333,4 @@ $(document).ready(function () {
         handlePageChange("search", { query: searchTerm });
     });
 
-    Swappable = Swappable.default;
-    const swappable = new Swappable(document.getElementById("content"), {
-        draggable: ".poster"
-    });
-
-    swappable.on("swappable:start", () => console.log("swappable:start"));
-    swappable.on("swappable:swapped", () => console.log("swappable:swapped"));
-    swappable.on("swappable:stop", () => console.log("swappable:stop"));
 });
