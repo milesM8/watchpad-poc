@@ -5,3 +5,7 @@ watchPad is a consolidated media entertainment platform combining the only thing
 Custom search any criteria and watchPad will deliver any and all relevant media in addition to providing the latest and most popular shows and movies. Add these to your collection or future watchlist! 
 
 Select any media and we will direct you to the fastest, closest way to watch it in seconds. All in one place.
+
+### Demo
+
+![alt text](https://media.giphy.com/media/KxtE75LhBgFxaOAY8h/giphy.gif)
